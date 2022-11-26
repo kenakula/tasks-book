@@ -4,6 +4,7 @@ import { HomePage, ProfilePage } from '../pages';
 import Layout from '../pages/layout';
 import { LoginPage } from '../pages/login-page';
 import { PrivateRoute } from './private-route';
+import { ProtectedRoute } from './protected-route';
 import { HOME_PAGE, PROFILE_PAGE, LOGIN_PAGE } from './routes';
 
 export const RouterComponent = (): JSX.Element => {
@@ -27,7 +28,14 @@ export const RouterComponent = (): JSX.Element => {
               </PrivateRoute>
             }
           />
-          <Route path={LOGIN_PAGE} element={<LoginPage />} />
+          <Route
+            path={LOGIN_PAGE}
+            element={
+              <ProtectedRoute>
+                <LoginPage />
+              </ProtectedRoute>
+            }
+          />
         </Route>
       </Routes>
     </BrowserRouter>

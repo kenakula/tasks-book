@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '../store';
+import { useAppSelector } from '../hooks/redux';
 import { HOME_PAGE } from './routes';
 
 export const ProtectedRoute = ({
@@ -8,9 +8,9 @@ export const ProtectedRoute = ({
 }: {
   children: JSX.Element;
 }): JSX.Element => {
-  let auth = useAuth();
+  const { authenticated } = useAppSelector(state => state.auth);
 
-  if (auth.user) {
+  if (authenticated) {
     return <Navigate to={HOME_PAGE} />;
   }
 
