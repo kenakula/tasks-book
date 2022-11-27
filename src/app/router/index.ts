@@ -1,2 +1,2 @@
 export * from './routes';
-export * from './private-route';
+export * from './router-component';

@@ -1,5 +1,5 @@
-import { Button, styled, SxProps } from '@mui/material';
 import React from 'react';
+import { Button, styled, SxProps } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { ColorTypes } from '../../shared/types';
 

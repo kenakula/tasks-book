@@ -9,15 +9,15 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { ReactComponent as FacebookIcon } from '../../assets/images/icon-fb.svg';
 import { ReactComponent as TwitterIcon } from '../../assets/images/icon-tw.svg';
 import { ButtonComponent, InputComponent } from '../components';
-import { useAppSelector } from '../hooks/redux';
+import { useAppSelector } from '../hooks';
 import { SIGNUP_PAGE } from '../router';
 
-export interface FormModel {
+interface FormModel {
   email: string;
   password: string;
 }
 
-export const formSchema = yup.object({
+const formSchema = yup.object({
   email: yup
     .string()
     .email('Неправильно введена почта')

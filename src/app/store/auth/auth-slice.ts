@@ -1,20 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-
-const loginMock = async (value: string): Promise<string> => {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(value);
-    }, 500);
-  });
-};
-
-const logoutMock = async (): Promise<void> => {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve();
-    }, 500);
-  });
-};
+import { loginMock, logoutMock } from './mocks';
 
 interface AuthState {
   authenticated: boolean;

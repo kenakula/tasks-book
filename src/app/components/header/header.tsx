@@ -18,14 +18,14 @@ import {
 import { NavLink, useNavigate } from 'react-router-dom';
 import { HOME_PAGE, PROFILE_PAGE } from '../../router';
 import { ReactComponent as Logo } from '../../../assets/images/logo.svg';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppSelector } from '../../hooks';
 import { useCustomTheme } from '../../themes/theme';
 import { DRAWER_WIDTH } from '../../shared/assets/layout-variables';
 import MenuIcon from '@mui/icons-material/Menu';
 import { todoCategories } from '../../shared/assets/todo-categories';
-import { renderIcon } from './render-list-icon';
 import { logOut } from '../../store/auth/auth-slice';
 import { useAppDispatch } from '../../store';
+import { renderIcon } from './assets';
 
 const LogoComponent = (): JSX.Element => (
   <Link

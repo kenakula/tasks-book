@@ -9,16 +9,16 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { ReactComponent as FacebookIcon } from '../../assets/images/icon-fb.svg';
 import { ReactComponent as TwitterIcon } from '../../assets/images/icon-tw.svg';
 import { ButtonComponent, InputComponent } from '../components';
-import { useAppSelector } from '../hooks/redux';
-import { LOGIN_PAGE } from '../router';
+import { useAppSelector } from '../hooks';
+import { HOME_PAGE, LOGIN_PAGE } from '../router';
 
-export interface FormModel {
+interface FormModel {
   email: string;
   password: string;
   confirmPassword: string;
 }
 
-export const formSchema = yup.object({
+const formSchema = yup.object({
   email: yup
     .string()
     .email('Почта введена неправильно')
@@ -77,7 +77,7 @@ export const SignupPage = (): JSX.Element => {
 
   function onSubmit(data: FormModel): void {
     dispatch(logIn(data.email)).then(() => {
-      navigate('/');
+      navigate(HOME_PAGE);
     });
   }
 

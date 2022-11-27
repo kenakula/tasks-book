@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { RouterComponent } from './router/router-component';
+import { RouterComponent } from './router';
 import { store } from './store';
 import { ThemeStoreProvider } from './themes/theme';
 

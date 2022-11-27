@@ -1,13 +1,13 @@
 import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { useAppSelector } from '../hooks/redux';
+import { useAppSelector } from '../hooks';
 import { LOGIN_PAGE } from './routes';
 
-export const PrivateRoute = ({
-  children,
-}: {
+interface Props {
   children: JSX.Element;
-}): JSX.Element => {
+}
+
+export const PrivateRoute = ({ children }: Props): JSX.Element => {
   let location = useLocation();
   const { authenticated } = useAppSelector(state => state.auth);
 

@@ -1,9 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { HomePage, ProfilePage } from '../pages';
-import Layout from '../pages/layout';
-import { LoginPage } from '../pages/login-page';
-import { SignupPage } from '../pages/signup-page';
+import { HomePage, Layout, LoginPage, ProfilePage, SignupPage } from '../pages';
 import { PrivateRoute } from './private-route';
 import { ProtectedRoute } from './protected-route';
 import { HOME_PAGE, PROFILE_PAGE, LOGIN_PAGE, SIGNUP_PAGE } from './routes';

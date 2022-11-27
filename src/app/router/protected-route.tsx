@@ -1,13 +1,13 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAppSelector } from '../hooks/redux';
+import { useAppSelector } from '../hooks';
 import { HOME_PAGE } from './routes';
 
-export const ProtectedRoute = ({
-  children,
-}: {
+interface Props {
   children: JSX.Element;
-}): JSX.Element => {
+}
+
+export const ProtectedRoute = ({ children }: Props): JSX.Element => {
   const { authenticated } = useAppSelector(state => state.auth);
 
   if (authenticated) {

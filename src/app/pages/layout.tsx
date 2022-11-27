@@ -3,7 +3,7 @@ import { Box, styled } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 import { Footer, Header } from '../components';
 import { DRAWER_WIDTH } from '../shared/assets/layout-variables';
-import { useAppSelector } from '../hooks/redux';
+import { useAppSelector } from '../hooks';
 
 const MainBox = styled(Box, { shouldForwardProp: prop => prop !== 'authed' })<{
   authed: boolean;
@@ -21,7 +21,7 @@ const MainBox = styled(Box, { shouldForwardProp: prop => prop !== 'authed' })<{
   },
 }));
 
-const Layout = (): JSX.Element => {
+export const Layout = (): JSX.Element => {
   const { authenticated } = useAppSelector(state => state.auth);
 
   return (
@@ -34,5 +34,3 @@ const Layout = (): JSX.Element => {
     </>
   );
 };
-
-export default Layout;
