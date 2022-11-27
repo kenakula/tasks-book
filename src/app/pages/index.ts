@@ -3,3 +3,7 @@ export * from './profile-page';
 export * from './login-page';
 export * from './signup-page';
 export * from './layout';
+export * from './compare-page';
+export * from './premium-page';
+export * from './settings-page';
+export * from './stats-page';

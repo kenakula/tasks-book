@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 import {
   Box,
   Typography,
@@ -16,7 +16,7 @@ import {
 import { deepPurple } from '@mui/material/colors';
 import { ReactComponent as DropdownIcon } from '../../../../assets/images/icon-drop.svg';
 import { renderIcon } from '../assets';
-import { PROFILE_PAGE } from '../../../router';
+import { PREMIUM_PAGE, PROFILE_PAGE, SETTINGS_PAGE } from '../../../router';
 import { NavLink } from 'react-router-dom';
 import { useCustomTheme } from '../../../themes/theme';
 
@@ -72,12 +72,14 @@ interface Props {
   theme: Theme;
   username: string;
   handleLogout: () => void;
+  isMobile: boolean;
 }
 
 export const MenuElement = ({
   theme,
   username,
   handleLogout,
+  isMobile,
 }: Props): JSX.Element => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { toggleColorMode } = useCustomTheme();
@@ -108,16 +110,18 @@ export const MenuElement = ({
       }}
     >
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
-        <Typography
-          sx={{
-            marginRight: '20px',
-            fontSize: 16,
-            fontWeight: 500,
-            color: theme.palette.text.primary,
-          }}
-        >
-          Хорошего дня, {username}
-        </Typography>
+        {!isMobile && (
+          <Typography
+            sx={{
+              marginRight: '20px',
+              fontSize: 16,
+              fontWeight: 500,
+              color: theme.palette.text.primary,
+            }}
+          >
+            Хорошего дня, {username}
+          </Typography>
+        )}
         <Avatar
           sx={{
             bgcolor: deepPurple[500],
@@ -170,13 +174,17 @@ export const MenuElement = ({
             </ListItemIcon>
             <ListItemText primary="Темный режим" />
           </MenuItem>
-          <MenuItem onClick={handleClose} component={NavLink} to="/settings">
+          <MenuItem
+            onClick={handleClose}
+            component={NavLink}
+            to={SETTINGS_PAGE}
+          >
             <ListItemIcon sx={{ minWidth: 30 }}>
               {renderIcon('settings')}
             </ListItemIcon>
             <ListItemText primary="Настройки" />
           </MenuItem>
-          <MenuItem onClick={handleClose} component={NavLink} to="/premium">
+          <MenuItem onClick={handleClose} component={NavLink} to={PREMIUM_PAGE}>
             <ListItemIcon
               sx={{ minWidth: 30, color: theme.palette.primary.main }}
             >

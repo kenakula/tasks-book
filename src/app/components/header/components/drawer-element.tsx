@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import {
   Box,
   Toolbar,
@@ -13,7 +13,7 @@ import {
   Theme,
 } from '@mui/material';
 import { NavLink } from 'react-router-dom';
-import { HOME_PAGE } from '../../../router';
+import { COMPARE_PAGE, HOME_PAGE, STATS_PAGE } from '../../../router';
 import { todoCategories } from '../../../shared/assets';
 import { renderIcon } from '../assets';
 import { ReactComponent as Logo } from '../../../../assets/images/logo.svg';
@@ -58,6 +58,20 @@ const CategoryItem = styled(ListItem, {
     transform: 'translateY(-50%)',
   },
 }));
+
+const CustomNavLink = forwardRef<any, any>((props, ref) => (
+  <NavLink
+    ref={ref}
+    to={props.to}
+    style={({ isActive }) => ({
+      position: 'relative',
+      opacity: isActive ? 0.4 : 1,
+      textDecoration: 'none',
+    })}
+  >
+    {props.children}
+  </NavLink>
+));
 
 interface Props {
   authenticated: boolean;
@@ -130,20 +144,30 @@ export const DrawerElement = ({
             Данные
           </Typography>
           <List sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-            <ListItem disablePadding>
+            <ListItem disablePadding component={CustomNavLink} to={STATS_PAGE}>
               <ListItemButton>
                 <ListItemIcon sx={{ minWidth: 30 }}>
                   {renderIcon('stats')}
                 </ListItemIcon>
-                <ListItemText primary="Статистика" />
+                <ListItemText
+                  sx={{ color: theme.palette.text.primary }}
+                  primary="Статистика"
+                />
               </ListItemButton>
             </ListItem>
-            <ListItem disablePadding>
+            <ListItem
+              disablePadding
+              component={CustomNavLink}
+              to={COMPARE_PAGE}
+            >
               <ListItemButton>
                 <ListItemIcon sx={{ minWidth: 30 }}>
                   {renderIcon('trending')}
                 </ListItemIcon>
-                <ListItemText primary="Сравнить" />
+                <ListItemText
+                  sx={{ color: theme.palette.text.primary }}
+                  primary="Сравнить"
+                />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding sx={{ marginTop: 'auto' }}>

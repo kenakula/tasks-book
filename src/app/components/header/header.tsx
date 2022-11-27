@@ -95,6 +95,7 @@ export const Header = (): JSX.Element => {
               handleLogout={handleLogout}
               theme={theme!}
               username={username!}
+              isMobile={!matches}
             />
           )}
         </CustomToolbar>

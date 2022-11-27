@@ -1,9 +1,28 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { HomePage, Layout, LoginPage, ProfilePage, SignupPage } from '../pages';
+import {
+  ComparePage,
+  HomePage,
+  Layout,
+  LoginPage,
+  PremiumPage,
+  ProfilePage,
+  SettingsPage,
+  SignupPage,
+  StatsPage,
+} from '../pages';
 import { PrivateRoute } from './private-route';
 import { ProtectedRoute } from './protected-route';
-import { HOME_PAGE, PROFILE_PAGE, LOGIN_PAGE, SIGNUP_PAGE } from './routes';
+import {
+  HOME_PAGE,
+  PROFILE_PAGE,
+  LOGIN_PAGE,
+  SIGNUP_PAGE,
+  STATS_PAGE,
+  COMPARE_PAGE,
+  SETTINGS_PAGE,
+  PREMIUM_PAGE,
+} from './routes';
 
 export const RouterComponent = (): JSX.Element => {
   return (
@@ -23,6 +42,38 @@ export const RouterComponent = (): JSX.Element => {
             element={
               <PrivateRoute>
                 <ProfilePage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={STATS_PAGE}
+            element={
+              <PrivateRoute>
+                <StatsPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={COMPARE_PAGE}
+            element={
+              <PrivateRoute>
+                <ComparePage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={SETTINGS_PAGE}
+            element={
+              <PrivateRoute>
+                <SettingsPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={PREMIUM_PAGE}
+            element={
+              <PrivateRoute>
+                <PremiumPage />
               </PrivateRoute>
             }
           />
