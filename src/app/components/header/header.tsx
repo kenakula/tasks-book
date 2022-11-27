@@ -4,72 +4,32 @@ import {
   Box,
   Drawer,
   IconButton,
-  Link,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
   styled,
   Toolbar,
-  Typography,
   useMediaQuery,
 } from '@mui/material';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { HOME_PAGE, PROFILE_PAGE } from '../../router';
-import { ReactComponent as Logo } from '../../../assets/images/logo.svg';
+import { useNavigate } from 'react-router-dom';
+import { HOME_PAGE } from '../../router';
 import { useAppSelector } from '../../hooks';
 import { useCustomTheme } from '../../themes/theme';
 import { DRAWER_WIDTH } from '../../shared/assets/layout-variables';
 import MenuIcon from '@mui/icons-material/Menu';
-import { todoCategories } from '../../shared/assets/todo-categories';
 import { logOut } from '../../store/auth/auth-slice';
 import { useAppDispatch } from '../../store';
+import { DrawerElement } from './components/drawer-element';
+import { MenuElement } from './components/menu-element';
 import { renderIcon } from './assets';
 
-const LogoComponent = (): JSX.Element => (
-  <Link
-    to={HOME_PAGE}
-    component={NavLink}
-    sx={{
-      display: 'flex',
-      alignItems: 'center',
-      maxWidth: '130px',
-      textDecoration: 'none',
-      fontSize: 18,
-      lineHeight: '23px',
-      fontWeight: 600,
-      svg: {
-        flexShrink: 0,
-        marginRight: '10px',
-      },
-    }}
-  >
-    <Logo />
-    Tasks Book
-  </Link>
-);
-
-const CategoryItem = styled(ListItem, {
-  shouldForwardProp: prop => prop !== 'active',
-})<{ active: boolean }>(({ theme, active }) => ({
+const CustomToolbar = styled(Toolbar)(({ theme }) => ({
   position: 'relative',
-  '&::before': {
-    content: "''",
-    position: 'absolute',
-    right: 0,
-    top: '50%',
-    display: active ? 'block' : 'none',
-    width: 30,
-    height: 18,
-    borderRadius: '10px 0 0 10px',
-    background: theme?.palette.primary.main,
-    transform: 'translateY(-50%)',
+  padding: '20px',
+  [theme.breakpoints.up('lg')]: {
+    paddingRight: '70px',
   },
 }));
 
 export const Header = (): JSX.Element => {
-  const { authenticated } = useAppSelector(state => state.auth);
+  const { authenticated, username } = useAppSelector(state => state.auth);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const { theme } = useCustomTheme();
   const matches = useMediaQuery(theme!.breakpoints.up('sm'));
@@ -87,95 +47,9 @@ export const Header = (): JSX.Element => {
 
   const handleLogout = (): void => {
     dispatch(logOut()).then(() => {
-      navigate('/');
+      navigate(HOME_PAGE);
     });
   };
-
-  const drawer = (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%',
-        paddingBottom: '20px',
-      }}
-    >
-      <Toolbar
-        sx={{
-          padding: '20px',
-          marginBottom: '40px',
-        }}
-      >
-        <LogoComponent />
-      </Toolbar>
-      {authenticated ? (
-        <>
-          <Typography
-            sx={{ padding: '0 16px', fontSize: 24, fontWeight: 500 }}
-            color="primary"
-          >
-            Категории
-          </Typography>
-          <List sx={{ marginBottom: '60px' }}>
-            {todoCategories.map(({ name, alias }) => (
-              <CategoryItem
-                active={currentCategory === alias}
-                key={alias}
-                disablePadding
-              >
-                <ListItemButton onClick={() => handleCategoryClick(alias)}>
-                  <ListItemIcon sx={{ minWidth: 30 }}>
-                    {renderIcon(alias)}
-                  </ListItemIcon>
-                  <ListItemText primary={name} />
-                </ListItemButton>
-              </CategoryItem>
-            ))}
-            <ListItem disablePadding color="primary">
-              <ListItemButton sx={{ color: theme?.palette.primary.main }}>
-                <ListItemIcon sx={{ minWidth: 30 }}>
-                  {renderIcon('add')}
-                </ListItemIcon>
-                <ListItemText primary="Добавить" />
-              </ListItemButton>
-            </ListItem>
-          </List>
-          <Typography
-            sx={{ padding: '0 16px', fontSize: 24, fontWeight: 500 }}
-            color="primary"
-          >
-            Данные
-          </Typography>
-          <List sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon sx={{ minWidth: 30 }}>
-                  {renderIcon('stats')}
-                </ListItemIcon>
-                <ListItemText primary="Статистика" />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon sx={{ minWidth: 30 }}>
-                  {renderIcon('trending')}
-                </ListItemIcon>
-                <ListItemText primary="Сравнить" />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding sx={{ marginTop: 'auto' }}>
-              <ListItemButton onClick={handleLogout}>
-                <ListItemIcon sx={{ minWidth: 30 }}>
-                  {renderIcon('logout')}
-                </ListItemIcon>
-                <ListItemText primary="Выйти" />
-              </ListItemButton>
-            </ListItem>
-          </List>
-        </>
-      ) : null}
-    </Box>
-  );
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -186,7 +60,7 @@ export const Header = (): JSX.Element => {
           boxShadow: 'none',
         }}
       >
-        <Toolbar sx={{ padding: '20px' }}>
+        <CustomToolbar>
           <IconButton
             color="primary"
             aria-label="open drawer"
@@ -196,17 +70,34 @@ export const Header = (): JSX.Element => {
           >
             <MenuIcon />
           </IconButton>
+          <Box
+            sx={{
+              position: 'absolute',
+              left: '50%',
+              top: '50%',
+              transform: 'translate(-50%, -50%)',
+              color:
+                theme?.palette.mode === 'light'
+                  ? theme?.palette.text.primary
+                  : theme?.palette.warning.main,
+              '& svg': {
+                fill:
+                  theme?.palette.mode === 'light'
+                    ? 'none'
+                    : theme?.palette.warning.main,
+              },
+            }}
+          >
+            {renderIcon('moon')}
+          </Box>
           {authenticated && (
-            <List sx={{ display: 'flex', flexShrink: 0, marginLeft: 'auto' }}>
-              <ListItem>
-                <NavLink to={HOME_PAGE}>home</NavLink>
-              </ListItem>
-              <ListItem>
-                <NavLink to={PROFILE_PAGE}>profile</NavLink>
-              </ListItem>
-            </List>
+            <MenuElement
+              handleLogout={handleLogout}
+              theme={theme!}
+              username={username!}
+            />
           )}
-        </Toolbar>
+        </CustomToolbar>
       </AppBar>
       <Box
         component="nav"
@@ -232,7 +123,13 @@ export const Header = (): JSX.Element => {
             }}
             open
           >
-            {drawer}
+            <DrawerElement
+              authenticated={authenticated}
+              theme={theme!}
+              currentCategory={currentCategory}
+              handleLogout={handleLogout}
+              handleCategoryClick={handleCategoryClick}
+            />
           </Drawer>
         ) : (
           <Drawer
@@ -253,7 +150,13 @@ export const Header = (): JSX.Element => {
               },
             }}
           >
-            {drawer}
+            <DrawerElement
+              authenticated={authenticated}
+              theme={theme!}
+              currentCategory={currentCategory}
+              handleLogout={handleLogout}
+              handleCategoryClick={handleCategoryClick}
+            />
           </Drawer>
         )}
       </Box>

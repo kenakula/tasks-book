@@ -7,6 +7,10 @@ import { ReactComponent as AddIcon } from '../../../../assets/images/icon-add.sv
 import { ReactComponent as TrendingIcon } from '../../../../assets/images/icon-trending.svg';
 import { ReactComponent as StatsIcon } from '../../../../assets/images/icon-stats.svg';
 import { ReactComponent as LogoutIcon } from '../../../../assets/images/icon-logout.svg';
+import { ReactComponent as MoonIcon } from '../../../../assets/images/icon-moon.svg';
+import { ReactComponent as SettingsIcon } from '../../../../assets/images/icon-settings.svg';
+import { ReactComponent as StarIcon } from '../../../../assets/images/icon-star.svg';
+import { ReactComponent as UserIcon } from '../../../../assets/images/icon-user.svg';
 
 export const renderIcon = (alias: string): JSX.Element => {
   switch (alias) {
@@ -24,6 +28,14 @@ export const renderIcon = (alias: string): JSX.Element => {
       return <StatsIcon />;
     case 'logout':
       return <LogoutIcon />;
+    case 'moon':
+      return <MoonIcon />;
+    case 'star':
+      return <StarIcon />;
+    case 'settings':
+      return <SettingsIcon />;
+    case 'user':
+      return <UserIcon />;
     default:
       return <SportIcon />;
   }

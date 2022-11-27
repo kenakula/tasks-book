@@ -8,9 +8,9 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  authenticated: false,
+  authenticated: true,
   loading: false,
-  username: null,
+  username: 'kenakula',
 };
 
 export const logIn = createAsyncThunk(
