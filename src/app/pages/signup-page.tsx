@@ -2,7 +2,7 @@ import React from 'react';
 import * as yup from 'yup';
 import { Box, Divider, Link, styled, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../store';
 import { logIn } from '../store/auth/auth-slice';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -10,22 +10,27 @@ import { ReactComponent as FacebookIcon } from '../../assets/images/icon-fb.svg'
 import { ReactComponent as TwitterIcon } from '../../assets/images/icon-tw.svg';
 import { ButtonComponent, InputComponent } from '../components';
 import { useAppSelector } from '../hooks/redux';
-import { SIGNUP_PAGE } from '../router';
+import { LOGIN_PAGE } from '../router';
 
 export interface FormModel {
   email: string;
   password: string;
+  confirmPassword: string;
 }
 
 export const formSchema = yup.object({
   email: yup
     .string()
-    .email('Неправильно введена почта')
-    .required('Введите вашу почту'),
+    .email('Почта введена неправильно')
+    .required('Это обязательное поле'),
   password: yup
     .string()
     .min(6, 'Введите не менее 6 символов')
-    .required('Введите пароль'),
+    .required('Это обязательное поле'),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref('password'), null], 'Пароли должны совпадать')
+    .required('Это обязательное поле'),
 });
 
 const FormWrapper = styled(Box)({
@@ -56,26 +61,23 @@ const SocialsWrapper = styled(Box)({
   },
 });
 
-export const LoginPage = (): JSX.Element => {
+export const SignupPage = (): JSX.Element => {
   const navigate = useNavigate();
-  const location = useLocation();
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector(state => state.auth);
-
-  const from = location.state?.from?.pathname || '/';
 
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<FormModel>({
-    defaultValues: { email: '', password: '' },
+    defaultValues: { email: '', password: '', confirmPassword: '' },
     resolver: yupResolver(formSchema),
   });
 
   function onSubmit(data: FormModel): void {
     dispatch(logIn(data.email)).then(() => {
-      navigate(from, { replace: true });
+      navigate('/');
     });
   }
 
@@ -86,7 +88,7 @@ export const LoginPage = (): JSX.Element => {
         sx={{ fontSize: 18, fontWeight: 500, marginBottom: '20px' }}
         textAlign="center"
       >
-        Вход в аккаунт
+        Регистрация
       </Typography>
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
         <InputComponent<FormModel>
@@ -111,6 +113,17 @@ export const LoginPage = (): JSX.Element => {
           small
           styles={{ marginBottom: '20px' }}
         />
+        <InputComponent<FormModel>
+          formControl={control}
+          type="password"
+          name="confirmPassword"
+          label="Повторите пароль"
+          fullwidth
+          error={!!errors.confirmPassword}
+          errorMessage="Пароли не совпадают"
+          small
+          styles={{ marginBottom: '20px' }}
+        />
         <Box
           sx={{
             display: 'flex',
@@ -119,7 +132,7 @@ export const LoginPage = (): JSX.Element => {
           }}
         >
           <ButtonComponent loadingIcon type="submit" loading={loading}>
-            Войти
+            Зарегистрироваться
           </ButtonComponent>
         </Box>
       </Box>
@@ -127,9 +140,9 @@ export const LoginPage = (): JSX.Element => {
         textAlign="center"
         sx={{ fontSize: 12, marginBottom: '20px' }}
       >
-        Еще нет аккаунта?{' '}
-        <Link component={RouterLink} to={SIGNUP_PAGE}>
-          Регистрация
+        Есть аккаунт?{' '}
+        <Link component={RouterLink} to={LOGIN_PAGE}>
+          Войти
         </Link>
       </Typography>
       <Divider

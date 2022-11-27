@@ -6,13 +6,11 @@ import { ThemeStoreProvider } from './themes/theme';
 
 const App = (): JSX.Element => {
   return (
-    <div className="app">
-      <ThemeStoreProvider>
-        <Provider store={store}>
-          <RouterComponent />
-        </Provider>
-      </ThemeStoreProvider>
-    </div>
+    <ThemeStoreProvider>
+      <Provider store={store}>
+        <RouterComponent />
+      </Provider>
+    </ThemeStoreProvider>
   );
 };
 

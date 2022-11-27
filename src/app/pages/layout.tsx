@@ -1,28 +1,36 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
-import { AuthStatus } from '../components/auth-status';
-import { HOME_PAGE, PROFILE_PAGE } from '../router';
+import { Box, styled } from '@mui/material';
+import { Outlet } from 'react-router-dom';
+import { Footer, Header } from '../components';
+import { DRAWER_WIDTH } from '../shared/assets/layout-variables';
+import { useAppSelector } from '../hooks/redux';
+
+const MainBox = styled(Box, { shouldForwardProp: prop => prop !== 'authed' })<{
+  authed: boolean;
+}>(({ theme, authed }) => ({
+  position: 'relative',
+  flexGrow: 1,
+  padding: '80px 20px 0',
+
+  [theme.breakpoints.up('sm')]: {
+    paddingLeft: `${(authed ? DRAWER_WIDTH : 0) + 20}px`,
+  },
+  [theme.breakpoints.up('lg')]: {
+    paddingLeft: `${(authed ? DRAWER_WIDTH : 0) + 70}px`,
+    paddingRight: '70px',
+  },
+}));
 
 const Layout = (): JSX.Element => {
+  const { authenticated } = useAppSelector(state => state.auth);
+
   return (
     <>
-      <header>
-        <AuthStatus />
-        <nav>
-          <ul>
-            <li>
-              <Link to={HOME_PAGE}>home page</Link>
-            </li>
-            <li>
-              <Link to={PROFILE_PAGE}>profile page</Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
-      <main>
+      <Header />
+      <MainBox authed={authenticated} component="main">
         <Outlet />
-      </main>
-      <footer>footer</footer>
+      </MainBox>
+      {authenticated ? null : <Footer />}
     </>
   );
 };

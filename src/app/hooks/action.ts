@@ -6,7 +6,7 @@ const actions = {
   ...authActions,
 };
 
-export const useActions = () => {
+export const useActions = (): Record<string, unknown> => {
   const dispatch = useDispatch();
 
   return bindActionCreators(actions, dispatch);

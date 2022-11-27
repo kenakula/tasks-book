@@ -3,9 +3,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { HomePage, ProfilePage } from '../pages';
 import Layout from '../pages/layout';
 import { LoginPage } from '../pages/login-page';
+import { SignupPage } from '../pages/signup-page';
 import { PrivateRoute } from './private-route';
 import { ProtectedRoute } from './protected-route';
-import { HOME_PAGE, PROFILE_PAGE, LOGIN_PAGE } from './routes';
+import { HOME_PAGE, PROFILE_PAGE, LOGIN_PAGE, SIGNUP_PAGE } from './routes';
 
 export const RouterComponent = (): JSX.Element => {
   return (
@@ -33,6 +34,14 @@ export const RouterComponent = (): JSX.Element => {
             element={
               <ProtectedRoute>
                 <LoginPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={SIGNUP_PAGE}
+            element={
+              <ProtectedRoute>
+                <SignupPage />
               </ProtectedRoute>
             }
           />
