@@ -18,13 +18,18 @@ import { logOut } from '../../store/auth/auth-slice';
 import { useAppDispatch } from '../../store';
 import { DrawerElement } from './components/drawer-element';
 import { MenuElement } from './components/menu-element';
-import { renderIcon } from './assets';
+import { ReactComponent as PlusIcon } from '../../../assets/images/icon-plus.svg';
+import { ButtonComponent } from '../button-component/button-component';
 
 const CustomToolbar = styled(Toolbar)(({ theme }) => ({
   position: 'relative',
   padding: '20px',
+  [theme.breakpoints.up('md')]: {
+    paddingLeft: `${DRAWER_WIDTH + 20}px`,
+  },
   [theme.breakpoints.up('lg')]: {
     paddingRight: '70px',
+    paddingLeft: `${DRAWER_WIDTH + 70}px`,
   },
 }));
 
@@ -32,7 +37,7 @@ export const Header = (): JSX.Element => {
   const { authenticated, username } = useAppSelector(state => state.auth);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const { theme } = useCustomTheme();
-  const matches = useMediaQuery(theme!.breakpoints.up('sm'));
+  const matches = useMediaQuery(theme!.breakpoints.up('md'));
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [currentCategory, setCurrentCategory] = useState<string>('dom');
@@ -66,30 +71,17 @@ export const Header = (): JSX.Element => {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
+            sx={{ mr: 2, display: { md: 'none' } }}
           >
             <MenuIcon />
           </IconButton>
-          <Box
-            sx={{
-              position: 'absolute',
-              left: '50%',
-              top: '50%',
-              transform: 'translate(-50%, -50%)',
-              color:
-                theme?.palette.mode === 'light'
-                  ? theme?.palette.text.primary
-                  : theme?.palette.warning.main,
-              '& svg': {
-                fill:
-                  theme?.palette.mode === 'light'
-                    ? 'none'
-                    : theme?.palette.warning.main,
-              },
-            }}
+          <ButtonComponent
+            startIcon={<PlusIcon />}
+            type="button"
+            styles={{ minWidth: '185px' }}
           >
-            {renderIcon('moon')}
-          </Box>
+            Новая задача
+          </ButtonComponent>
           {authenticated && (
             <MenuElement
               handleLogout={handleLogout}

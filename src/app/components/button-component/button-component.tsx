@@ -27,6 +27,7 @@ interface Props {
   styles?: SxProps;
   loadingIcon?: boolean;
   loading?: boolean;
+  startIcon?: JSX.Element;
 }
 
 export const ButtonComponent = ({
@@ -37,6 +38,7 @@ export const ButtonComponent = ({
   styles,
   loadingIcon,
   loading,
+  startIcon,
 }: Props): JSX.Element => {
   if (loadingIcon) {
     return (
@@ -46,6 +48,7 @@ export const ButtonComponent = ({
         color={color}
         sx={styles ?? undefined}
         loading={loading}
+        startIcon={startIcon ?? undefined}
       >
         {children}
       </CustomLoadingButton>
@@ -58,6 +61,7 @@ export const ButtonComponent = ({
       variant={variant}
       color={color}
       sx={styles ?? undefined}
+      startIcon={startIcon ?? undefined}
     >
       {children}
     </CustomButton>
