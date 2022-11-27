@@ -28,7 +28,7 @@ const formSchema = yup.object({
     .required('Введите пароль'),
 });
 
-const FormWrapper = styled(Box)({
+const FormWrapper = styled(Box)(({ theme }) => ({
   position: 'relative',
   top: '50%',
   margin: '0 auto',
@@ -36,8 +36,9 @@ const FormWrapper = styled(Box)({
   maxWidth: 350,
   borderRadius: 10,
   transform: 'translateY(-50%)',
-  boxShadow: '0 10px 25px rgba(29, 52, 54, 0.2)',
-});
+  boxShadow: theme.shadows[12],
+  background: theme.palette.background.paper,
+}));
 
 const SocialsWrapper = styled(Box)({
   display: 'flex',

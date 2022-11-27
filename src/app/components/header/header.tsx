@@ -227,9 +227,7 @@ export const Header = (): JSX.Element => {
                 background: authenticated
                   ? theme?.palette.background.paper
                   : 'transparent',
-                boxShadow: authenticated
-                  ? '0 10px 25px rgba(29, 52, 54, 0.2)'
-                  : 'none',
+                boxShadow: authenticated ? theme?.shadows[8] : 'none',
               },
             }}
             open
