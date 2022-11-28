@@ -1,4 +1,4 @@
-import { UserModel } from '../../shared/types';
+import { UserModel } from 'app/shared/types';
 
 export const loginMock = async (value: UserModel): Promise<UserModel> => {
   return new Promise(resolve => {

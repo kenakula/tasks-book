@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAppSelector } from '../hooks';
+import { useAppSelector } from 'app/hooks';
 import { HOME_PAGE } from './routes';
 
 interface Props {

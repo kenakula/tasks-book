@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { UserModel } from '../../shared/types';
+import { UserModel } from 'app/shared/types';
 import { loginMock, logoutMock, saveUserDataMock } from './mocks';
 
 interface AuthState {

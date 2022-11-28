@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled, SxProps, TextField } from '@mui/material';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
-import { ColorTypes, InputTypes } from '../../shared/types';
+import { ColorTypes, InputTypes } from 'app/shared/types';
 
 const CustomInput = styled(TextField)({
   '.MuiInputBase-root': {

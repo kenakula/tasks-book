@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, styled, SxProps } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import { ColorTypes } from '../../shared/types';
+import { ColorTypes } from 'app/shared/types';
 
 const CustomButton = styled(Button)(({ theme }) => ({
   flexShrink: 0,

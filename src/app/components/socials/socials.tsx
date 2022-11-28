@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Link, styled, SxProps } from '@mui/material';
-import { ReactComponent as FacebookIcon } from '../../../assets/images/icon-fb.svg';
-import { ReactComponent as TwitterIcon } from '../../../assets/images/icon-tw.svg';
+import { ReactComponent as FacebookIcon } from 'assets/images/icon-fb.svg';
+import { ReactComponent as TwitterIcon } from 'assets/images/icon-tw.svg';
 
 const SocialsWrapper = styled(Box)({
   display: 'flex',

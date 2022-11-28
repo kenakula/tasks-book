@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Link, styled, Typography } from '@mui/material';
-import { ReactComponent as CopyIcon } from '../../../assets/images/icon-copy.svg';
+import { ReactComponent as CopyIcon } from 'assets/images/icon-copy.svg';
 
 const FooterWrapper = styled(Box)(({ theme }) => ({
   display: 'flex',

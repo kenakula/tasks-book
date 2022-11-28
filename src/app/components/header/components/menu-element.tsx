@@ -12,12 +12,12 @@ import {
   ListItemText,
   MenuItem,
 } from '@mui/material';
-import { ReactComponent as DropdownIcon } from '../../../../assets/images/icon-drop.svg';
-import { renderIcon } from '../assets';
-import { PREMIUM_PAGE, PROFILE_PAGE, SETTINGS_PAGE } from '../../../router';
+import { ReactComponent as DropdownIcon } from 'assets/images/icon-drop.svg';
+import { PREMIUM_PAGE, PROFILE_PAGE, SETTINGS_PAGE } from 'app/router';
 import { NavLink } from 'react-router-dom';
-import { useCustomTheme } from '../../../themes/theme';
+import { useCustomTheme } from 'app/themes/theme';
 import { AvatarComponent } from './avatar-component';
+import { renderIcon } from '../assets';
 
 const CustomMenu = styled((props: MenuProps) => (
   <Menu

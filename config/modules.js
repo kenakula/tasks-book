@@ -44,7 +44,7 @@ function getAdditionalModulePaths(options = {}) {
   throw new Error(
     chalk.red.bold(
       "Your project's `baseUrl` can only be set to `src` or `node_modules`." +
-        ' Create React App does not support other values at this time.'
+      ' Create React App does not support other values at this time.'
     )
   );
 }
@@ -66,6 +66,8 @@ function getWebpackAliases(options = {}) {
   if (path.relative(paths.appPath, baseUrlResolved) === '') {
     return {
       src: paths.appSrc,
+      app: path.resolve(baseUrlResolved, './app'),
+      assets: path.resolve(baseUrlResolved, './assets'),
     };
   }
 }

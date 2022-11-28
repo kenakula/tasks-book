@@ -13,10 +13,10 @@ import {
   Theme,
 } from '@mui/material';
 import { NavLink } from 'react-router-dom';
-import { COMPARE_PAGE, HOME_PAGE, STATS_PAGE } from '../../../router';
-import { todoCategories } from '../../../shared/assets';
+import { COMPARE_PAGE, HOME_PAGE, STATS_PAGE } from 'app/router';
+import { todoCategories } from 'app/shared/assets';
+import { ReactComponent as Logo } from 'assets/images/logo.svg';
 import { renderIcon } from '../assets';
-import { ReactComponent as Logo } from '../../../../assets/images/logo.svg';
 
 const LogoComponent = (): JSX.Element => (
   <Link

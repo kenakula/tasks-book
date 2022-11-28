@@ -1,9 +1,6 @@
 import React from 'react';
 import { Avatar, IconButton, styled, SxProps } from '@mui/material';
-import {
-  getAvatarLetters,
-  getUsernameColorString,
-} from '../../../shared/assets';
+import { getAvatarLetters, getUsernameColorString } from 'app/shared/assets';
 
 const CustomAvatar = styled(Avatar, {
   shouldForwardProp: prop => prop !== 'background',

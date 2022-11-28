@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from 'app/hooks';
 import { CustomPaper, PageColumn, PageWrapper, UserInfo } from './components';
 
 export const ProfilePage = (): JSX.Element => {

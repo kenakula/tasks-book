@@ -7,7 +7,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import { LOCAL_STORAGE_THEME_KEY } from '../shared/assets/local-storage-keys';
+import { LOCAL_STORAGE_THEME_KEY } from 'app/shared/assets/local-storage-keys';
 
 type ContextProps = {
   mode: PaletteMode;

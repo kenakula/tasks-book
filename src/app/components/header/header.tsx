@@ -9,14 +9,14 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { HOME_PAGE } from '../../router';
-import { useAppSelector } from '../../hooks';
-import { useCustomTheme } from '../../themes/theme';
-import { DRAWER_WIDTH } from '../../shared/assets/layout-variables';
+import { HOME_PAGE } from 'app/router';
+import { useAppSelector } from 'app/hooks';
+import { useCustomTheme } from 'app/themes/theme';
+import { DRAWER_WIDTH } from 'app/shared/assets/layout-variables';
 import MenuIcon from '@mui/icons-material/Menu';
-import { logOut } from '../../store/auth/auth-slice';
-import { useAppDispatch } from '../../store';
-import { ReactComponent as PlusIcon } from '../../../assets/images/icon-plus.svg';
+import { logOut } from 'app/store/auth/auth-slice';
+import { useAppDispatch } from 'app/store';
+import { ReactComponent as PlusIcon } from 'assets/images/icon-plus.svg';
 import { ButtonComponent } from '../button-component/button-component';
 import { DrawerElement, MenuElement } from './components';
 

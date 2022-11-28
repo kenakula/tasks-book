@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box, styled } from '@mui/material';
 import { Outlet } from 'react-router-dom';
-import { Footer, Header } from '../components';
-import { DRAWER_WIDTH } from '../shared/assets/layout-variables';
-import { useAppSelector } from '../hooks';
+import { Footer, Header } from 'app/components';
+import { DRAWER_WIDTH } from 'app/shared/assets/layout-variables';
+import { useAppSelector } from 'app/hooks';
 
 const MainBox = styled(Box, { shouldForwardProp: prop => prop !== 'authed' })<{
   authed: boolean;

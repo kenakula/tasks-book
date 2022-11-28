@@ -6,11 +6,11 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../store';
 import { logIn } from '../store/auth/auth-slice';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { ReactComponent as FacebookIcon } from '../../assets/images/icon-fb.svg';
-import { ReactComponent as TwitterIcon } from '../../assets/images/icon-tw.svg';
-import { ButtonComponent, InputComponent } from '../components';
-import { useAppSelector } from '../hooks';
-import { HOME_PAGE, LOGIN_PAGE } from '../router';
+import { ReactComponent as FacebookIcon } from 'assets/images/icon-fb.svg';
+import { ReactComponent as TwitterIcon } from 'assets/images/icon-tw.svg';
+import { ButtonComponent, InputComponent } from 'app/components';
+import { useAppSelector } from 'app/hooks';
+import { HOME_PAGE, LOGIN_PAGE } from 'app/router';
 
 interface FormModel {
   email: string;

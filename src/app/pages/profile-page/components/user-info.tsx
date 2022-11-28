@@ -8,22 +8,19 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import {
-  getAvatarLetters,
-  getUsernameColorString,
-} from '../../../shared/assets';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { getAvatarLetters, getUsernameColorString } from 'app/shared/assets';
 import {
   ButtonComponent,
   CheckboxComponent,
   InputComponent,
   Socials,
-} from '../../../components';
-import { useAppDispatch } from '../../../store';
-import { saveUserInfo } from '../../../store/auth/auth-slice';
-import { UserModel } from '../../../shared/types';
+} from 'app/components';
+import { useAppDispatch } from 'app/store';
+import { saveUserInfo } from 'app/store/auth/auth-slice';
+import { UserModel } from 'app/shared/types';
 
 const CustomAvatar = styled(Avatar, {
   shouldForwardProp: prop => prop !== 'background',
