@@ -16,10 +16,9 @@ import { DRAWER_WIDTH } from '../../shared/assets/layout-variables';
 import MenuIcon from '@mui/icons-material/Menu';
 import { logOut } from '../../store/auth/auth-slice';
 import { useAppDispatch } from '../../store';
-import { DrawerElement } from './components/drawer-element';
-import { MenuElement } from './components/menu-element';
 import { ReactComponent as PlusIcon } from '../../../assets/images/icon-plus.svg';
 import { ButtonComponent } from '../button-component/button-component';
+import { DrawerElement, MenuElement } from './components';
 
 const CustomToolbar = styled(Toolbar)(({ theme }) => ({
   position: 'relative',
@@ -27,16 +26,14 @@ const CustomToolbar = styled(Toolbar)(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
     paddingLeft: `${DRAWER_WIDTH + 20}px`,
   },
-  [theme.breakpoints.up('lg')]: {
+  [theme.breakpoints.up('xl')]: {
     paddingRight: '70px',
     paddingLeft: `${DRAWER_WIDTH + 70}px`,
   },
 }));
 
 export const Header = (): JSX.Element => {
-  const { authenticated, username, avatarPath } = useAppSelector(
-    state => state.auth,
-  );
+  const { authenticated, user } = useAppSelector(state => state.auth);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const { theme } = useCustomTheme();
   const matches = useMediaQuery(theme!.breakpoints.up('md'));
@@ -77,7 +74,7 @@ export const Header = (): JSX.Element => {
           >
             <MenuIcon />
           </IconButton>
-          {authenticated && (
+          {authenticated && user && (
             <>
               <ButtonComponent startIcon={<PlusIcon />} type="button">
                 Новая задача
@@ -85,9 +82,9 @@ export const Header = (): JSX.Element => {
               <MenuElement
                 handleLogout={handleLogout}
                 theme={theme!}
-                username={username!}
+                username={user.name}
                 isMobile={!matches}
-                avatar={avatarPath}
+                avatar={user.userImage}
               />
             </>
           )}

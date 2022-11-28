@@ -12,10 +12,10 @@ const MainBox = styled(Box, { shouldForwardProp: prop => prop !== 'authed' })<{
   flexGrow: 1,
   padding: '80px 20px 0',
 
-  [theme.breakpoints.up('sm')]: {
+  [theme.breakpoints.up('md')]: {
     paddingLeft: `${(authed ? DRAWER_WIDTH : 0) + 20}px`,
   },
-  [theme.breakpoints.up('lg')]: {
+  [theme.breakpoints.up('xl')]: {
     paddingLeft: `${(authed ? DRAWER_WIDTH : 0) + 70}px`,
     paddingRight: '70px',
   },

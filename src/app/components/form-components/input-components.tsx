@@ -19,7 +19,7 @@ interface Props<T extends FieldValues> {
   type: InputTypes;
   name: Path<T>;
   label?: string;
-  fullwidth: boolean;
+  fullwidth?: boolean;
   error?: boolean;
   errorMessage?: string;
   variant?: 'outlined' | 'standard' | 'filled';
@@ -27,6 +27,7 @@ interface Props<T extends FieldValues> {
   color?: ColorTypes;
   styles?: SxProps;
   multiline?: number;
+  id?: string;
 }
 
 export const InputComponent = <T extends FieldValues>({
@@ -42,6 +43,7 @@ export const InputComponent = <T extends FieldValues>({
   errorMessage,
   styles,
   multiline,
+  id,
 }: Props<T>): JSX.Element => {
   return (
     <Controller
@@ -50,6 +52,7 @@ export const InputComponent = <T extends FieldValues>({
       render={({ field }) => (
         <CustomInput
           {...field}
+          id={id ?? undefined}
           sx={styles}
           size={small ? 'small' : undefined}
           label={label ?? undefined}

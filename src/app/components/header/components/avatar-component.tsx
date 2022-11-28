@@ -1,6 +1,9 @@
 import React from 'react';
 import { Avatar, IconButton, styled, SxProps } from '@mui/material';
-import { getAvatarLetters, getUsernameColorString } from './assets';
+import {
+  getAvatarLetters,
+  getUsernameColorString,
+} from '../../../shared/assets';
 
 const CustomAvatar = styled(Avatar, {
   shouldForwardProp: prop => prop !== 'background',
@@ -15,7 +18,7 @@ const CustomAvatar = styled(Avatar, {
 
 interface Props {
   username: string;
-  clickHandler: (event: React.MouseEvent<HTMLElement>) => void;
+  clickHandler?: (event: React.MouseEvent<HTMLElement>) => void;
   imagePath?: string;
   styles?: SxProps;
 }
@@ -27,7 +30,7 @@ export const AvatarComponent = ({
   styles,
 }: Props): JSX.Element => {
   return (
-    <IconButton onClick={clickHandler}>
+    <IconButton onClick={clickHandler ?? undefined}>
       <CustomAvatar
         src={imagePath ?? undefined}
         sx={styles ?? undefined}

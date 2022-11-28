@@ -1,34 +1,41 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { loginMock, logoutMock } from './mocks';
+import { UserModel } from '../../shared/types';
+import { loginMock, logoutMock, saveUserDataMock } from './mocks';
 
 interface AuthState {
   authenticated: boolean;
   loading: boolean;
-  username: string | null;
-  avatarPath: string;
+  error: boolean;
+  user: UserModel | null;
 }
 
 const initialState: AuthState = {
-  authenticated: true,
+  authenticated: false,
   loading: false,
-  username: 'kenakula',
-  avatarPath: '',
+  error: false,
+  user: { name: '', email: '', subscribed: false, userImage: '' },
 };
 
-export const logIn = createAsyncThunk(
-  'auth/login',
-  async (username: string) => {
-    const res = await loginMock(username);
+export const logIn = createAsyncThunk('auth/login', async (user: UserModel) => {
+  const res = await loginMock(user);
 
-    return res;
-  },
-);
+  return res;
+});
 
 export const logOut = createAsyncThunk('auth/logout', async () => {
   const res = await logoutMock();
 
   return res;
 });
+
+export const saveUserInfo = createAsyncThunk(
+  'auth/saveInfo',
+  async (data: UserModel) => {
+    const res = await saveUserDataMock(data);
+
+    return res;
+  },
+);
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -42,15 +49,22 @@ export const authSlice = createSlice({
       .addCase(logIn.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.authenticated = true;
-        state.username = payload;
+        state.user = payload;
       })
       .addCase(logOut.pending, state => {
         state.loading = true;
       })
       .addCase(logOut.fulfilled, state => {
         state.loading = false;
-        state.username = null;
+        state.user = null;
         state.authenticated = false;
+      })
+      .addCase(saveUserInfo.pending, state => {
+        state.loading = true;
+      })
+      .addCase(saveUserInfo.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.user = payload;
       });
   },
 });

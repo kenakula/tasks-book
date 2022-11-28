@@ -6,9 +6,7 @@ import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../store';
 import { logIn } from '../store/auth/auth-slice';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { ReactComponent as FacebookIcon } from '../../assets/images/icon-fb.svg';
-import { ReactComponent as TwitterIcon } from '../../assets/images/icon-tw.svg';
-import { ButtonComponent, InputComponent } from '../components';
+import { ButtonComponent, InputComponent, Socials } from '../components';
 import { useAppSelector } from '../hooks';
 import { SIGNUP_PAGE } from '../router';
 
@@ -36,26 +34,9 @@ const FormWrapper = styled(Box)(({ theme }) => ({
   maxWidth: 350,
   borderRadius: 10,
   transform: 'translateY(-50%)',
-  boxShadow: theme.shadows[12],
+  boxShadow: '0 10px 25px rgba(29, 52, 54, 0.2)',
   background: theme.palette.background.paper,
 }));
-
-const SocialsWrapper = styled(Box)({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  '.MuiLink-root': {
-    display: 'flex',
-    marginRight: '20px',
-    transition: 'opacity 0.2s ease-in',
-    '&:hover': {
-      opacity: 0.7,
-    },
-    '&:last-child': {
-      marginRight: 0,
-    },
-  },
-});
 
 export const LoginPage = (): JSX.Element => {
   const navigate = useNavigate();
@@ -74,8 +55,10 @@ export const LoginPage = (): JSX.Element => {
     resolver: yupResolver(formSchema),
   });
 
-  function onSubmit(data: FormModel): void {
-    dispatch(logIn(data.email)).then(() => {
+  function onSubmit({ email }: FormModel): void {
+    dispatch(
+      logIn({ name: email, email, userImage: '', subscribed: false }),
+    ).then(() => {
       navigate(from, { replace: true });
     });
   }
@@ -139,21 +122,7 @@ export const LoginPage = (): JSX.Element => {
       >
         или
       </Divider>
-      <SocialsWrapper
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          rowGap: '20px',
-        }}
-      >
-        <Link target="_blank" rel="noreferrer" href="www.facebook.com">
-          <FacebookIcon />
-        </Link>
-        <Link target="_blank" rel="noreferrer" href="www.twitter.com">
-          <TwitterIcon />
-        </Link>
-      </SocialsWrapper>
+      <Socials />
     </FormWrapper>
   );
 };

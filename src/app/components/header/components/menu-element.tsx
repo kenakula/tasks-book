@@ -17,7 +17,7 @@ import { renderIcon } from '../assets';
 import { PREMIUM_PAGE, PROFILE_PAGE, SETTINGS_PAGE } from '../../../router';
 import { NavLink } from 'react-router-dom';
 import { useCustomTheme } from '../../../themes/theme';
-import { AvatarComponent } from '../../avatar-component/avatar-component';
+import { AvatarComponent } from './avatar-component';
 
 const CustomMenu = styled((props: MenuProps) => (
   <Menu
@@ -42,7 +42,7 @@ const CustomMenu = styled((props: MenuProps) => (
       theme.palette.mode === 'light'
         ? 'rgb(55, 65, 81)'
         : theme.palette.grey[300],
-    boxShadow: theme.shadows[12],
+    boxShadow: '0 10px 25px rgba(29, 52, 54, 0.2)',
     '& .MuiMenu-list': {
       padding: '4px 0',
       fontSize: 12,

@@ -33,7 +33,7 @@ const formSchema = yup.object({
     .required('Это обязательное поле'),
 });
 
-const FormWrapper = styled(Box)(({ theme }) => ({
+const FormWrapper = styled(Box)({
   position: 'relative',
   top: '50%',
   margin: '0 auto',
@@ -41,8 +41,8 @@ const FormWrapper = styled(Box)(({ theme }) => ({
   maxWidth: 350,
   borderRadius: 10,
   transform: 'translateY(-50%)',
-  boxShadow: theme.shadows[12],
-}));
+  boxShadow: '0 10px 25px rgba(29, 52, 54, 0.2)',
+});
 
 const SocialsWrapper = styled(Box)({
   display: 'flex',
@@ -75,8 +75,10 @@ export const SignupPage = (): JSX.Element => {
     resolver: yupResolver(formSchema),
   });
 
-  function onSubmit(data: FormModel): void {
-    dispatch(logIn(data.email)).then(() => {
+  function onSubmit({ email }: FormModel): void {
+    dispatch(
+      logIn({ name: email, email, userImage: '', subscribed: false }),
+    ).then(() => {
       navigate(HOME_PAGE);
     });
   }
