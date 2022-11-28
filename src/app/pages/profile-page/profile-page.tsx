@@ -1,6 +1,15 @@
 import React from 'react';
 import { useAppSelector } from 'app/hooks';
-import { CustomPaper, PageColumn, PageWrapper, UserInfo } from './components';
+import {
+  CustomPaper,
+  DateTimeComponent,
+  Facts,
+  Observation,
+  PageColumn,
+  PageWrapper,
+  PremiumLink,
+  UserInfo,
+} from './components';
 
 export const ProfilePage = (): JSX.Element => {
   const { user, loading } = useAppSelector(state => state.auth);
@@ -11,6 +20,12 @@ export const ProfilePage = (): JSX.Element => {
         <CustomPaper>
           {user && <UserInfo user={user} loading={loading} />}
         </CustomPaper>
+      </PageColumn>
+      <PageColumn spacing={4}>
+        <PremiumLink />
+        <DateTimeComponent />
+        <Observation />
+        <Facts />
       </PageColumn>
     </PageWrapper>
   );

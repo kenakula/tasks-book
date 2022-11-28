@@ -1,13 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-import {
-  Avatar,
-  Box,
-  Button,
-  styled,
-  Tooltip,
-  Typography,
-} from '@mui/material';
+import { Avatar, Box, Button, styled, Typography } from '@mui/material';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -28,9 +21,11 @@ const CustomAvatar = styled(Avatar, {
   width: 100,
   height: 100,
   backgroundColor: background,
-  [theme.breakpoints.up('xl')]: {
+  fontSize: 38,
+  [theme.breakpoints.up('md')]: {
     width: 150,
     height: 150,
+    fontSize: 60,
   },
 }));
 
@@ -47,6 +42,16 @@ const InputWrapper = styled(Box)({
     fontWeight: 500,
   },
 });
+
+const InfoWrapper = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  rowGap: '20px',
+  columnGap: '20px',
+  [theme.breakpoints.up('sm')]: {
+    flexDirection: 'row',
+  },
+}));
 
 type FormModel = {
   name: string;
@@ -100,7 +105,7 @@ export const UserInfo = ({
   };
 
   return (
-    <Box sx={{ display: 'flex', columnGap: '20px' }}>
+    <InfoWrapper>
       <Box
         sx={{
           display: 'flex',
@@ -112,26 +117,22 @@ export const UserInfo = ({
         <CustomAvatar background={getUsernameColorString(name)} src={userImage}>
           {getAvatarLetters(name)}
         </CustomAvatar>
-        <Tooltip title="Не более 2 Mb">
-          <>
-            <FileInput
-              accept="image/*"
-              id="contained-button-file"
-              type="file"
-              onChange={onInputFileSelect}
-            />
-            <label htmlFor="contained-button-file">
-              <Button
-                variant="text"
-                component="span"
-                size="small"
-                sx={{ textTransform: 'none' }}
-              >
-                изменить фото
-              </Button>
-            </label>
-          </>
-        </Tooltip>
+        <FileInput
+          accept="image/*"
+          id="contained-button-file"
+          type="file"
+          onChange={onInputFileSelect}
+        />
+        <label htmlFor="contained-button-file">
+          <Button
+            variant="text"
+            component="span"
+            size="small"
+            sx={{ textTransform: 'none' }}
+          >
+            изменить фото
+          </Button>
+        </label>
       </Box>
       <Box
         component="form"
@@ -179,6 +180,6 @@ export const UserInfo = ({
           Сохранить изменения
         </ButtonComponent>
       </Box>
-    </Box>
+    </InfoWrapper>
   );
 };
