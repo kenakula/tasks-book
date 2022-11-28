@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import {
   Box,
   Toolbar,
@@ -75,19 +75,23 @@ const CustomNavLink = forwardRef<any, any>((props, ref) => (
 
 interface Props {
   authenticated: boolean;
-  currentCategory: string;
   handleLogout: () => void;
-  handleCategoryClick: (alias: string) => void;
   theme: Theme;
 }
 
 export const DrawerElement = ({
   authenticated,
-  currentCategory,
   handleLogout,
-  handleCategoryClick,
   theme,
 }: Props): JSX.Element => {
+  const [currentCategory, setCurrentCategory] = useState<string>(
+    todoCategories[0].alias,
+  );
+
+  const handleCategoryClick = (alias: string): void => {
+    setCurrentCategory(alias);
+  };
+
   return (
     <Box
       sx={{

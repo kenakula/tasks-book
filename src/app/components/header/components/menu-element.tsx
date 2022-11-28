@@ -63,6 +63,10 @@ const CustomMenu = styled((props: MenuProps) => (
           theme.palette.action.selectedOpacity,
         ),
       },
+      '&.active': {
+        opacity: 0.3,
+        pointerEvents: 'none',
+      },
     },
   },
 }));

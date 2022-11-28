@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   AppBar,
   Box,
@@ -39,11 +39,6 @@ export const Header = (): JSX.Element => {
   const matches = useMediaQuery(theme!.breakpoints.up('md'));
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [currentCategory, setCurrentCategory] = useState<string>('dom');
-
-  const handleCategoryClick = (alias: string): void => {
-    setCurrentCategory(alias);
-  };
 
   const handleDrawerToggle = (): void => {
     setMobileOpen(!mobileOpen);
@@ -117,9 +112,7 @@ export const Header = (): JSX.Element => {
             <DrawerElement
               authenticated={authenticated}
               theme={theme!}
-              currentCategory={currentCategory}
               handleLogout={handleLogout}
-              handleCategoryClick={handleCategoryClick}
             />
           </Drawer>
         ) : (
@@ -144,9 +137,7 @@ export const Header = (): JSX.Element => {
             <DrawerElement
               authenticated={authenticated}
               theme={theme!}
-              currentCategory={currentCategory}
               handleLogout={handleLogout}
-              handleCategoryClick={handleCategoryClick}
             />
           </Drawer>
         )}
