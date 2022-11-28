@@ -5,12 +5,14 @@ interface AuthState {
   authenticated: boolean;
   loading: boolean;
   username: string | null;
+  avatarPath: string;
 }
 
 const initialState: AuthState = {
   authenticated: true,
   loading: false,
   username: 'kenakula',
+  avatarPath: '',
 };
 
 export const logIn = createAsyncThunk(

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   Box,
   Typography,
-  Avatar,
   IconButton,
   Theme,
   Menu,
@@ -13,18 +12,18 @@ import {
   ListItemText,
   MenuItem,
 } from '@mui/material';
-import { deepPurple } from '@mui/material/colors';
 import { ReactComponent as DropdownIcon } from '../../../../assets/images/icon-drop.svg';
 import { renderIcon } from '../assets';
 import { PREMIUM_PAGE, PROFILE_PAGE, SETTINGS_PAGE } from '../../../router';
 import { NavLink } from 'react-router-dom';
 import { useCustomTheme } from '../../../themes/theme';
+import { AvatarComponent } from '../../avatar-component/avatar-component';
 
 const CustomMenu = styled((props: MenuProps) => (
   <Menu
     elevation={0}
     anchorOrigin={{
-      vertical: 'top',
+      vertical: 'bottom',
       horizontal: 'left',
     }}
     transformOrigin={{
@@ -73,6 +72,7 @@ interface Props {
   username: string;
   handleLogout: () => void;
   isMobile: boolean;
+  avatar: string;
 }
 
 export const MenuElement = ({
@@ -80,6 +80,7 @@ export const MenuElement = ({
   username,
   handleLogout,
   isMobile,
+  avatar,
 }: Props): JSX.Element => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { toggleColorMode } = useCustomTheme();
@@ -122,20 +123,17 @@ export const MenuElement = ({
             Хорошего дня, {username}
           </Typography>
         )}
-        <Avatar
-          sx={{
-            bgcolor: deepPurple[500],
-            marginRight: '10px',
-            width: 44,
-            height: 44,
-          }}
-        >
-          KA
-        </Avatar>
+        <AvatarComponent
+          clickHandler={handleClick}
+          username={username}
+          imagePath={avatar}
+        />
         <IconButton
-          size="large"
           onClick={handleClick}
-          sx={{ transform: open ? 'rotate(180deg)' : 'none' }}
+          sx={{
+            transform: open ? 'rotate(180deg)' : 'none',
+            transition: 'transform 0.2s ease-in',
+          }}
         >
           <DropdownIcon fontSize="64px" />
         </IconButton>

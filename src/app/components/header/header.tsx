@@ -23,7 +23,7 @@ import { ButtonComponent } from '../button-component/button-component';
 
 const CustomToolbar = styled(Toolbar)(({ theme }) => ({
   position: 'relative',
-  padding: '20px',
+  padding: '14px 20px',
   [theme.breakpoints.up('md')]: {
     paddingLeft: `${DRAWER_WIDTH + 20}px`,
   },
@@ -34,7 +34,9 @@ const CustomToolbar = styled(Toolbar)(({ theme }) => ({
 }));
 
 export const Header = (): JSX.Element => {
-  const { authenticated, username } = useAppSelector(state => state.auth);
+  const { authenticated, username, avatarPath } = useAppSelector(
+    state => state.auth,
+  );
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const { theme } = useCustomTheme();
   const matches = useMediaQuery(theme!.breakpoints.up('md'));
@@ -75,20 +77,19 @@ export const Header = (): JSX.Element => {
           >
             <MenuIcon />
           </IconButton>
-          <ButtonComponent
-            startIcon={<PlusIcon />}
-            type="button"
-            styles={{ minWidth: '185px' }}
-          >
-            Новая задача
-          </ButtonComponent>
           {authenticated && (
-            <MenuElement
-              handleLogout={handleLogout}
-              theme={theme!}
-              username={username!}
-              isMobile={!matches}
-            />
+            <>
+              <ButtonComponent startIcon={<PlusIcon />} type="button">
+                Новая задача
+              </ButtonComponent>
+              <MenuElement
+                handleLogout={handleLogout}
+                theme={theme!}
+                username={username!}
+                isMobile={!matches}
+                avatar={avatarPath}
+              />
+            </>
           )}
         </CustomToolbar>
       </AppBar>

@@ -3,13 +3,25 @@ import { Button, styled, SxProps } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { ColorTypes } from '../../shared/types';
 
-const CustomButton = styled(Button)({
+const CustomButton = styled(Button)(({ theme }) => ({
+  flexShrink: 0,
   padding: '7px 25px',
   borderRadius: '8px',
   textTransform: 'none',
-  fontSize: '16px',
+  fontSize: 12,
   fontWeight: 500,
-});
+  '& svg': {
+    width: 15,
+    height: 15,
+  },
+  [theme.breakpoints.up('sm')]: {
+    fontSize: 16,
+    '& svg': {
+      width: 20,
+      height: 20,
+    },
+  },
+}));
 
 const CustomLoadingButton = styled(LoadingButton)({
   padding: '7px 25px',
