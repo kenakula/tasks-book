@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, CircularProgress, Typography } from '@mui/material';
-import { useGetFactQuery } from 'app/store/facts/facts.query';
+import { useGetFactQuery } from 'app/store';
 import { CustomPaper, CustomPaperTitle } from './custom-elements';
 
 export const Facts = (): JSX.Element => {

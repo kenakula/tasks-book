@@ -1,4 +1,4 @@
-export * from './todo-types';
+export * from './task-category-type';
 export * from './color-types';
 export * from './input-types';
 export * from './user-model';

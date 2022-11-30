@@ -11,8 +11,7 @@ import {
   InputComponent,
   Socials,
 } from 'app/components';
-import { useAppDispatch } from 'app/store';
-import { saveUserInfo } from 'app/store/auth/auth-slice';
+import { useAppDispatch, saveUserInfo } from 'app/store';
 import { UserModel } from 'app/shared/types';
 
 const CustomAvatar = styled(Avatar, {

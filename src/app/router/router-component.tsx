@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import {
   ComparePage,
   HomePage,
@@ -94,6 +94,7 @@ export const RouterComponent = (): JSX.Element => {
             }
           />
         </Route>
+        <Route path="/" element={<Navigate to={HOME_PAGE} />} />
       </Routes>
     </BrowserRouter>
   );

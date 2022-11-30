@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { UserModel } from 'app/shared/types';
-import { loginMock, logoutMock, saveUserDataMock } from './mocks';
+import { loginMock, logoutMock, saveUserDataMock } from '../mocks';
 
 interface AuthState {
   authenticated: boolean;
@@ -13,7 +13,12 @@ const initialState: AuthState = {
   authenticated: false,
   loading: false,
   error: false,
-  user: { name: '', email: '', subscribed: false, userImage: '' },
+  user: {
+    name: 'kenan',
+    email: 'sfdfs@fdfdf.ru',
+    subscribed: false,
+    userImage: '',
+  },
 };
 
 export const logIn = createAsyncThunk('auth/login', async (user: UserModel) => {

@@ -77,14 +77,16 @@ interface Props {
   handleLogout: () => void;
   isMobile: boolean;
   avatar: string;
+  setCategory: (alias: string) => void;
 }
 
 export const MenuElement = ({
   theme,
-  username,
-  handleLogout,
-  isMobile,
   avatar,
+  username,
+  isMobile,
+  setCategory,
+  handleLogout,
 }: Props): JSX.Element => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { toggleColorMode } = useCustomTheme();
@@ -142,7 +144,14 @@ export const MenuElement = ({
           <DropdownIcon fontSize="64px" />
         </IconButton>
         <CustomMenu anchorEl={anchorEl} open={open} onClose={handleClose}>
-          <MenuItem onClick={handleClose} component={NavLink} to={PROFILE_PAGE}>
+          <MenuItem
+            onClick={() => {
+              handleClose();
+              setCategory('');
+            }}
+            component={NavLink}
+            to={PROFILE_PAGE}
+          >
             <ListItemIcon sx={{ minWidth: 30 }}>
               {renderIcon('user')}
             </ListItemIcon>
@@ -177,7 +186,10 @@ export const MenuElement = ({
             <ListItemText primary="Темный режим" />
           </MenuItem>
           <MenuItem
-            onClick={handleClose}
+            onClick={() => {
+              handleClose();
+              setCategory('');
+            }}
             component={NavLink}
             to={SETTINGS_PAGE}
           >
@@ -186,7 +198,14 @@ export const MenuElement = ({
             </ListItemIcon>
             <ListItemText primary="Настройки" />
           </MenuItem>
-          <MenuItem onClick={handleClose} component={NavLink} to={PREMIUM_PAGE}>
+          <MenuItem
+            onClick={() => {
+              handleClose();
+              setCategory('');
+            }}
+            component={NavLink}
+            to={PREMIUM_PAGE}
+          >
             <ListItemIcon
               sx={{ minWidth: 30, color: theme.palette.primary.main }}
             >
@@ -200,6 +219,7 @@ export const MenuElement = ({
           <MenuItem
             onClick={() => {
               handleClose();
+              setCategory('');
               handleLogout();
             }}
           >

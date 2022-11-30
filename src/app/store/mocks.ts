@@ -1,4 +1,11 @@
-import { UserModel } from 'app/shared/types';
+import { ITaskCategory, UserModel } from 'app/shared/types';
+
+const categories: ITaskCategory[] = [
+  { name: 'Дом', alias: 'dom' },
+  { name: 'Семья', alias: 'semya' },
+  { name: 'Работа', alias: 'rabota' },
+  { name: 'Спорт ', alias: 'sport' },
+];
 
 export const loginMock = async (value: UserModel): Promise<UserModel> => {
   return new Promise(resolve => {
@@ -20,6 +27,14 @@ export const saveUserDataMock = async (data: UserModel): Promise<UserModel> => {
   return new Promise(resolve => {
     setTimeout(() => {
       resolve(data);
+    }, 500);
+  });
+};
+
+export const fetchTasks = async (): Promise<ITaskCategory[]> => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(categories);
     }, 500);
   });
 };

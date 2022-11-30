@@ -3,8 +3,7 @@ import * as yup from 'yup';
 import { Box, Divider, Link, styled, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../store';
-import { logIn } from '../store/auth/auth-slice';
+import { logIn, useAppDispatch } from '../store';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ReactComponent as FacebookIcon } from 'assets/images/icon-fb.svg';
 import { ReactComponent as TwitterIcon } from 'assets/images/icon-tw.svg';
@@ -33,7 +32,7 @@ const formSchema = yup.object({
     .required('Это обязательное поле'),
 });
 
-const FormWrapper = styled(Box)({
+const FormWrapper = styled(Box)(({ theme }) => ({
   position: 'relative',
   top: '50%',
   margin: '0 auto',
@@ -42,7 +41,8 @@ const FormWrapper = styled(Box)({
   borderRadius: 10,
   transform: 'translateY(-50%)',
   boxShadow: '0 10px 25px rgba(29, 52, 54, 0.2)',
-});
+  background: theme.palette.background.paper,
+}));
 
 const SocialsWrapper = styled(Box)({
   display: 'flex',

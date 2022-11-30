@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   AppBar,
   Box,
@@ -14,11 +14,16 @@ import { useAppSelector } from 'app/hooks';
 import { useCustomTheme } from 'app/themes/theme';
 import { DRAWER_WIDTH } from 'app/shared/assets/layout-variables';
 import MenuIcon from '@mui/icons-material/Menu';
-import { logOut } from 'app/store/auth/auth-slice';
-import { useAppDispatch } from 'app/store';
+import {
+  fetchTaskCategories,
+  logOut,
+  setCurrentCategory,
+  useAppDispatch,
+} from 'app/store';
 import { ReactComponent as PlusIcon } from 'assets/images/icon-plus.svg';
 import { ButtonComponent } from '../button-component/button-component';
 import { DrawerElement, MenuElement } from './components';
+import { defaultTaskCategory } from 'app/shared/assets';
 
 const CustomToolbar = styled(Toolbar)(({ theme }) => ({
   position: 'relative',
@@ -34,11 +39,28 @@ const CustomToolbar = styled(Toolbar)(({ theme }) => ({
 
 export const Header = (): JSX.Element => {
   const { authenticated, user } = useAppSelector(state => state.auth);
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const { categories } = useAppSelector(state => state.tasks);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const { theme } = useCustomTheme();
   const matches = useMediaQuery(theme!.breakpoints.up('md'));
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (authenticated) {
+      dispatch(fetchTaskCategories());
+    }
+  }, [authenticated, dispatch]);
+
+  const setCategory = (alias: string): void => {
+    const category = categories.filter(cat => cat.alias === alias)[0];
+
+    if (category) {
+      dispatch(setCurrentCategory(category));
+    } else {
+      dispatch(setCurrentCategory(defaultTaskCategory));
+    }
+  };
 
   const handleDrawerToggle = (): void => {
     setMobileOpen(!mobileOpen);
@@ -80,6 +102,7 @@ export const Header = (): JSX.Element => {
                 username={user.name}
                 isMobile={!matches}
                 avatar={user.userImage}
+                setCategory={setCategory}
               />
             </>
           )}
@@ -113,6 +136,7 @@ export const Header = (): JSX.Element => {
               authenticated={authenticated}
               theme={theme!}
               handleLogout={handleLogout}
+              setCategory={setCategory}
             />
           </Drawer>
         ) : (
@@ -138,6 +162,7 @@ export const Header = (): JSX.Element => {
               authenticated={authenticated}
               theme={theme!}
               handleLogout={handleLogout}
+              setCategory={setCategory}
             />
           </Drawer>
         )}

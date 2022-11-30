@@ -3,12 +3,11 @@ import * as yup from 'yup';
 import { Box, Divider, Link, styled, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
-import { useAppDispatch } from 'app/store';
-import { logIn } from 'app/store/auth/auth-slice';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ButtonComponent, InputComponent, Socials } from 'app/components';
 import { useAppSelector } from 'app/hooks';
 import { SIGNUP_PAGE } from 'app/router';
+import { useAppDispatch, logIn } from 'app/store';
 
 interface FormModel {
   email: string;
