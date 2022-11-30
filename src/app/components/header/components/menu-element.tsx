@@ -77,7 +77,6 @@ interface Props {
   handleLogout: () => void;
   isMobile: boolean;
   avatar: string;
-  setCategory: (alias: string) => void;
 }
 
 export const MenuElement = ({
@@ -85,7 +84,6 @@ export const MenuElement = ({
   avatar,
   username,
   isMobile,
-  setCategory,
   handleLogout,
 }: Props): JSX.Element => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -147,7 +145,6 @@ export const MenuElement = ({
           <MenuItem
             onClick={() => {
               handleClose();
-              setCategory('');
             }}
             component={NavLink}
             to={PROFILE_PAGE}
@@ -188,7 +185,6 @@ export const MenuElement = ({
           <MenuItem
             onClick={() => {
               handleClose();
-              setCategory('');
             }}
             component={NavLink}
             to={SETTINGS_PAGE}
@@ -201,7 +197,6 @@ export const MenuElement = ({
           <MenuItem
             onClick={() => {
               handleClose();
-              setCategory('');
             }}
             component={NavLink}
             to={PREMIUM_PAGE}
@@ -219,7 +214,6 @@ export const MenuElement = ({
           <MenuItem
             onClick={() => {
               handleClose();
-              setCategory('');
               handleLogout();
             }}
           >

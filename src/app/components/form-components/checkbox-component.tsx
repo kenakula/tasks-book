@@ -16,6 +16,7 @@ interface Props {
   name: string;
   label?: string;
   color?: 'error' | 'primary' | 'secondary' | 'info' | 'success' | 'warning';
+  disabled?: boolean;
 }
 
 export const CheckboxComponent = ({
@@ -23,6 +24,7 @@ export const CheckboxComponent = ({
   name,
   color = 'primary',
   label,
+  disabled,
 }: Props): JSX.Element => {
   return (
     <FormControlLabel
@@ -33,6 +35,7 @@ export const CheckboxComponent = ({
           control={formControl}
           render={({ field }) => (
             <CustomCheckbox
+              disabled={disabled}
               color={color}
               {...field}
               checked={field.value}

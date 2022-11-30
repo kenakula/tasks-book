@@ -149,6 +149,7 @@ export const UserInfo = ({
             name="name"
             id="name-input"
             fullwidth
+            disabled={loading}
           />
         </InputWrapper>
         <InputWrapper sx={{ mb: 1 }}>
@@ -162,12 +163,14 @@ export const UserInfo = ({
             name="email"
             id="email-input"
             fullwidth
+            disabled={loading}
           />
         </InputWrapper>
         <CheckboxComponent
           formControl={control}
           name="subscribed"
           label="Подписаться на рассылку"
+          disabled={loading}
         />
         <Box sx={{ paddingTop: '30px', marginBottom: '30px' }}>
           <Typography sx={{ marginBottom: '10px' }}>

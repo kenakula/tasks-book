@@ -102,7 +102,6 @@ export const Header = (): JSX.Element => {
                 username={user.name}
                 isMobile={!matches}
                 avatar={user.userImage}
-                setCategory={setCategory}
               />
             </>
           )}

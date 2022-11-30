@@ -28,6 +28,7 @@ interface Props<T extends FieldValues> {
   styles?: SxProps;
   multiline?: number;
   id?: string;
+  disabled?: boolean;
 }
 
 export const InputComponent = <T extends FieldValues>({
@@ -43,6 +44,7 @@ export const InputComponent = <T extends FieldValues>({
   errorMessage,
   styles,
   multiline,
+  disabled,
   id,
 }: Props<T>): JSX.Element => {
   return (
@@ -63,6 +65,7 @@ export const InputComponent = <T extends FieldValues>({
           type={type}
           color={color}
           error={error}
+          disabled={disabled}
           helperText={error && errorMessage}
         />
       )}

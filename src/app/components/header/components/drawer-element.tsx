@@ -119,7 +119,11 @@ export const DrawerElement = ({
                   key={alias}
                   disablePadding
                 >
-                  <ListItemButton onClick={() => handleCategoryClick(alias)}>
+                  <ListItemButton
+                    component={NavLink}
+                    to={HOME_PAGE}
+                    onClick={() => handleCategoryClick(alias)}
+                  >
                     <ListItemIcon sx={{ minWidth: 30 }}>
                       {renderIcon(alias)}
                     </ListItemIcon>
@@ -150,7 +154,6 @@ export const DrawerElement = ({
               <ListItemButton
                 component={NavLink}
                 to={STATS_PAGE}
-                onClick={() => handleCategoryClick('')}
                 sx={{
                   '&.active': {
                     opacity: 0.4,
@@ -171,7 +174,6 @@ export const DrawerElement = ({
               <ListItemButton
                 component={NavLink}
                 to={COMPARE_PAGE}
-                onClick={() => handleCategoryClick('')}
                 sx={{
                   '&.active': {
                     opacity: 0.4,
