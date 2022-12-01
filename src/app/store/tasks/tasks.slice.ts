@@ -40,7 +40,6 @@ export const tasksSlice = createSlice({
       .addCase(fetchTaskCategories.fulfilled, (state, { payload }) => {
         state.categoriesLoading = false;
         state.categories = payload;
-        state.currentCategory = payload[0];
       });
   },
 });

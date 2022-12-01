@@ -94,7 +94,6 @@ export const RouterComponent = (): JSX.Element => {
             }
           />
         </Route>
-        <Route path="/" element={<Navigate to={HOME_PAGE} />} />
       </Routes>
     </BrowserRouter>
   );

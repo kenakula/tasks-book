@@ -1,7 +1,8 @@
 import React from 'react';
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { useGetFactQuery } from 'app/store';
-import { CustomPaper, CustomPaperTitle } from './custom-elements';
+import { CustomPaper, CustomPaperTitle } from 'app/shared/assets';
+import { Loader } from 'app/components';
 
 export const Facts = (): JSX.Element => {
   const { isLoading, isError, data } = useGetFactQuery(1, {
@@ -11,11 +12,7 @@ export const Facts = (): JSX.Element => {
   return (
     <CustomPaper>
       <CustomPaperTitle>Факт дня</CustomPaperTitle>
-      {isLoading && (
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <CircularProgress size={20} color="primary" />
-        </Box>
-      )}
+      {isLoading && <Loader />}
       {isError && (
         <Typography color="error" sx={{ fontWeight: 600 }} textAlign="center">
           Произошла ошибка, попробуйте позже.

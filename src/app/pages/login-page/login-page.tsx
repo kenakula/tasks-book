@@ -1,13 +1,18 @@
 import React from 'react';
 import * as yup from 'yup';
-import { Box, Divider, Link, styled, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { ButtonComponent, InputComponent, Socials } from 'app/components';
+import {
+  ButtonComponent,
+  ConnectAccount,
+  InputComponent,
+} from 'app/components';
 import { useAppSelector } from 'app/hooks';
 import { SIGNUP_PAGE } from 'app/router';
 import { useAppDispatch, logIn } from 'app/store';
+import { ButtonWrapper, FormTitle, FormWrapper } from 'app/shared/assets';
 
 interface FormModel {
   email: string;
@@ -24,18 +29,6 @@ const formSchema = yup.object({
     .min(6, 'Введите не менее 6 символов')
     .required('Введите пароль'),
 });
-
-const FormWrapper = styled(Box)(({ theme }) => ({
-  position: 'relative',
-  top: '50%',
-  margin: '0 auto',
-  padding: 20,
-  maxWidth: 350,
-  borderRadius: 10,
-  transform: 'translateY(-50%)',
-  boxShadow: '0 10px 25px rgba(29, 52, 54, 0.2)',
-  background: theme.palette.background.paper,
-}));
 
 export const LoginPage = (): JSX.Element => {
   const navigate = useNavigate();
@@ -64,13 +57,9 @@ export const LoginPage = (): JSX.Element => {
 
   return (
     <FormWrapper>
-      <Typography
-        color="primary"
-        sx={{ fontSize: 18, fontWeight: 500, marginBottom: '20px' }}
-        textAlign="center"
-      >
+      <FormTitle color="primary" textAlign="center">
         Вход в аккаунт
-      </Typography>
+      </FormTitle>
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
         <InputComponent<FormModel>
           formControl={control}
@@ -94,34 +83,17 @@ export const LoginPage = (): JSX.Element => {
           small
           styles={{ marginBottom: '20px' }}
         />
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            marginBottom: '20px',
-          }}
-        >
+        <ButtonWrapper>
           <ButtonComponent loadingIcon type="submit" loading={loading}>
             Войти
           </ButtonComponent>
-        </Box>
+        </ButtonWrapper>
       </Box>
-      <Typography
-        textAlign="center"
-        sx={{ fontSize: 12, marginBottom: '20px' }}
-      >
-        Еще нет аккаунта?{' '}
-        <Link component={RouterLink} to={SIGNUP_PAGE}>
-          Регистрация
-        </Link>
-      </Typography>
-      <Divider
-        light
-        sx={{ '.MuiDivider-wrapper': { opacity: 0.4 }, marginBottom: '20px' }}
-      >
-        или
-      </Divider>
-      <Socials />
+      <ConnectAccount
+        text="Еще нет аккаунта?"
+        link={SIGNUP_PAGE}
+        linkText="Регистрация"
+      />
     </FormWrapper>
   );
 };

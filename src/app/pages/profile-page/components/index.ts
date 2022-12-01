@@ -1,4 +1,4 @@
-export * from './custom-elements';
+export * from './custom-components';
 export * from './user-info';
 export * from './date-time-component';
 export * from './premium-link';

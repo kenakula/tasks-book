@@ -1,10 +1,14 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-import { Avatar, Box, Button, styled, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { getAvatarLetters, getUsernameColorString } from 'app/shared/assets';
+import {
+  getAvatarLetters,
+  getUsernameColorString,
+  InputWrapper,
+} from 'app/shared/assets';
 import {
   ButtonComponent,
   CheckboxComponent,
@@ -13,44 +17,7 @@ import {
 } from 'app/components';
 import { useAppDispatch, saveUserInfo } from 'app/store';
 import { UserModel } from 'app/shared/types';
-
-const CustomAvatar = styled(Avatar, {
-  shouldForwardProp: prop => prop !== 'background',
-})<{ background: string }>(({ theme, background }) => ({
-  width: 100,
-  height: 100,
-  backgroundColor: background,
-  fontSize: 38,
-  [theme.breakpoints.up('md')]: {
-    width: 150,
-    height: 150,
-    fontSize: 60,
-  },
-}));
-
-const FileInput = styled('input')({
-  display: 'none',
-});
-
-const InputWrapper = styled(Box)({
-  width: '100%',
-  '& .MuiTypography-root': {
-    display: 'block',
-    marginBottom: '10px',
-    fontSize: 14,
-    fontWeight: 500,
-  },
-});
-
-const InfoWrapper = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  rowGap: '20px',
-  columnGap: '20px',
-  [theme.breakpoints.up('sm')]: {
-    flexDirection: 'row',
-  },
-}));
+import { InfoWrapper, CustomAvatar, FileInput } from './custom-components';
 
 type FormModel = {
   name: string;
@@ -105,24 +72,17 @@ export const UserInfo = ({
 
   return (
     <InfoWrapper>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          rowGap: '10px',
-        }}
-      >
+      <Box>
         <CustomAvatar background={getUsernameColorString(name)} src={userImage}>
           {getAvatarLetters(name)}
         </CustomAvatar>
         <FileInput
           accept="image/*"
-          id="contained-button-file"
+          id="button-file"
           type="file"
           onChange={onInputFileSelect}
         />
-        <label htmlFor="contained-button-file">
+        <label htmlFor="button-file">
           <Button
             variant="text"
             component="span"
@@ -176,7 +136,7 @@ export const UserInfo = ({
           <Typography sx={{ marginBottom: '10px' }}>
             Ваши социальные сети:
           </Typography>
-          <Socials styles={{ justifyContent: 'flex-start' }} />
+          <Socials />
         </Box>
         <ButtonComponent loadingIcon loading={loading} type="submit">
           Сохранить изменения

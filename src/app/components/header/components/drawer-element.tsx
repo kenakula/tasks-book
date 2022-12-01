@@ -2,52 +2,37 @@ import React from 'react';
 import {
   Box,
   Toolbar,
-  Typography,
   List,
   ListItemButton,
   ListItemIcon,
   ListItemText,
   ListItem,
   Link,
-  styled,
-  Theme,
   Skeleton,
 } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { HOME_PAGE, COMPARE_PAGE, STATS_PAGE } from 'app/router';
 import { ReactComponent as Logo } from 'assets/images/logo.svg';
-import { renderIcon } from '../assets';
+import {
+  AddCategoryButton,
+  CategoryItem,
+  DrawerTitle,
+  renderIcon,
+} from '../assets';
 import { useAppSelector } from 'app/hooks';
 import { setCurrentCategory, useAppDispatch } from 'app/store';
-
-const CategoryItem = styled(ListItem, {
-  shouldForwardProp: prop => prop !== 'active',
-})<{ active: boolean }>(({ theme, active }) => ({
-  position: 'relative',
-  '&::before': {
-    content: "''",
-    position: 'absolute',
-    right: 0,
-    top: '50%',
-    display: active ? 'block' : 'none',
-    width: 30,
-    height: 18,
-    borderRadius: '10px 0 0 10px',
-    transform: 'translateY(-50%)',
-    background: theme.palette.primary.main,
-  },
-}));
+import { defaultTaskCategory } from 'app/shared/assets';
 
 interface Props {
-  theme: Theme;
   authenticated: boolean;
   handleLogout: () => void;
   setCategory: (alias: string) => void;
+  toggleDrawer: () => void;
 }
 
 export const DrawerElement = ({
-  theme,
   setCategory,
+  toggleDrawer,
   handleLogout,
   authenticated,
 }: Props): JSX.Element => {
@@ -58,12 +43,18 @@ export const DrawerElement = ({
 
   const handleCategoryClick = (alias: string): void => {
     setCategory(alias);
+    toggleDrawer();
   };
 
   const handleLogoClick = (): void => {
     if (categories) {
       dispatch(setCurrentCategory(categories[0]));
     }
+  };
+
+  const handleLinkClick = (): void => {
+    dispatch(setCurrentCategory(defaultTaskCategory));
+    toggleDrawer();
   };
 
   return (
@@ -105,13 +96,8 @@ export const DrawerElement = ({
       </Toolbar>
       {authenticated ? (
         <>
-          <Typography
-            sx={{ padding: '0 16px', fontSize: 24, fontWeight: 500 }}
-            color="primary"
-          >
-            Категории
-          </Typography>
-          {!categoriesLoading ? (
+          <DrawerTitle color="primary">Категории</DrawerTitle>
+          {!categoriesLoading && currentCategory ? (
             <List sx={{ marginBottom: '60px' }}>
               {categories.map(({ name, alias }) => (
                 <CategoryItem
@@ -124,70 +110,59 @@ export const DrawerElement = ({
                     to={HOME_PAGE}
                     onClick={() => handleCategoryClick(alias)}
                   >
-                    <ListItemIcon sx={{ minWidth: 30 }}>
-                      {renderIcon(alias)}
-                    </ListItemIcon>
+                    <ListItemIcon>{renderIcon(alias)}</ListItemIcon>
                     <ListItemText primary={name} />
                   </ListItemButton>
                 </CategoryItem>
               ))}
               <ListItem disablePadding color="primary">
-                <ListItemButton sx={{ color: theme?.palette.primary.main }}>
-                  <ListItemIcon sx={{ minWidth: 30 }}>
-                    {renderIcon('add')}
-                  </ListItemIcon>
+                <AddCategoryButton>
+                  <ListItemIcon>{renderIcon('add')}</ListItemIcon>
                   <ListItemText primary="Добавить" />
-                </ListItemButton>
+                </AddCategoryButton>
               </ListItem>
             </List>
           ) : (
             <Skeleton height={300} sx={{ mx: 2 }} />
           )}
-          <Typography
-            sx={{ padding: '0 16px', fontSize: 24, fontWeight: 500 }}
-            color="primary"
-          >
-            Данные
-          </Typography>
+          <DrawerTitle color="primary">Данные</DrawerTitle>
           <List sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
             <ListItem disablePadding>
               <ListItemButton
                 component={NavLink}
+                onClick={handleLinkClick}
                 to={STATS_PAGE}
                 sx={{
                   '&.active': {
                     opacity: 0.4,
                     pointerEvent: 'none',
                   },
+                  '& .MuiListItemIcon-root': {
+                    minWidth: 30,
+                  },
                 }}
               >
-                <ListItemIcon sx={{ minWidth: 30 }}>
-                  {renderIcon('stats')}
-                </ListItemIcon>
-                <ListItemText
-                  sx={{ color: theme.palette.text.primary }}
-                  primary="Статистика"
-                />
+                <ListItemIcon>{renderIcon('stats')}</ListItemIcon>
+                <ListItemText primary="Статистика" />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton
                 component={NavLink}
                 to={COMPARE_PAGE}
+                onClick={handleLinkClick}
                 sx={{
                   '&.active': {
                     opacity: 0.4,
                     pointerEvent: 'none',
                   },
+                  '& .MuiListItemIcon-root': {
+                    minWidth: 30,
+                  },
                 }}
               >
-                <ListItemIcon sx={{ minWidth: 30 }}>
-                  {renderIcon('trending')}
-                </ListItemIcon>
-                <ListItemText
-                  sx={{ color: theme.palette.text.primary }}
-                  primary="Сравнить"
-                />
+                <ListItemIcon>{renderIcon('trending')}</ListItemIcon>
+                <ListItemText primary="Сравнить" />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding sx={{ marginTop: 'auto' }}>

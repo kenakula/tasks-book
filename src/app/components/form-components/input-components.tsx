@@ -1,18 +1,8 @@
 import React from 'react';
-import { styled, SxProps, TextField } from '@mui/material';
+import { SxProps } from '@mui/material';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 import { ColorTypes, InputTypes } from 'app/shared/types';
-
-const CustomInput = styled(TextField)({
-  '.MuiInputBase-root': {
-    borderRadius: '8px',
-  },
-  '.MuiFormLabel-root': {
-    opacity: 0.9,
-    fontSize: 14,
-    lineHeight: '1.7em',
-  },
-});
+import { CustomInput } from './assets';
 
 interface Props<T extends FieldValues> {
   formControl: Control<T, any>;

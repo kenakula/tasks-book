@@ -1,13 +1,7 @@
 import React from 'react';
-import { Checkbox, FormControlLabel, styled } from '@mui/material';
+import { FormControlLabel } from '@mui/material';
 import { Controller } from 'react-hook-form';
-
-const CustomCheckbox = styled(Checkbox)({
-  padding: '16px',
-  width: 18,
-  height: 18,
-  borderRadius: 4,
-});
+import { CustomCheckbox } from './assets';
 
 interface Props {
   error?: boolean;

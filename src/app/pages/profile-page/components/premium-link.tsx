@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography, Link } from '@mui/material';
 import { PREMIUM_PAGE } from 'app/router';
 import { NavLink } from 'react-router-dom';
-import { CustomPaper } from './custom-elements';
+import { CustomPaper } from 'app/shared/assets';
 
 export const PremiumLink = (): JSX.Element => {
   return (

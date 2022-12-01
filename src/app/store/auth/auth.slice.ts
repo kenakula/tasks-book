@@ -10,7 +10,7 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  authenticated: true,
+  authenticated: false,
   loading: false,
   error: false,
   user: {

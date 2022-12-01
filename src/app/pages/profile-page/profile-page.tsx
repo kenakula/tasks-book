@@ -1,7 +1,6 @@
 import React from 'react';
 import { useAppSelector } from 'app/hooks';
 import {
-  CustomPaper,
   DateTimeComponent,
   Facts,
   Observation,
@@ -10,6 +9,7 @@ import {
   PremiumLink,
   UserInfo,
 } from './components';
+import { CustomPaper } from 'app/shared/assets';
 
 export const ProfilePage = (): JSX.Element => {
   const { user, loading } = useAppSelector(state => state.auth);

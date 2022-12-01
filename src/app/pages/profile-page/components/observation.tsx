@@ -1,8 +1,8 @@
+import React from 'react';
 import { Typography, Link } from '@mui/material';
 import { HOME_PAGE } from 'app/router';
-import React from 'react';
+import { CustomPaper, CustomPaperTitle } from 'app/shared/assets';
 import { Link as RouterLink } from 'react-router-dom';
-import { CustomPaper, CustomPaperTitle } from './custom-elements';
 
 export const Observation = (): JSX.Element => {
   return (

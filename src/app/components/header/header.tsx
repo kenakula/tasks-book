@@ -1,18 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import {
-  AppBar,
-  Box,
-  Drawer,
-  IconButton,
-  styled,
-  Toolbar,
-  useMediaQuery,
-} from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { AppBar, IconButton, useMediaQuery } from '@mui/material';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { HOME_PAGE } from 'app/router';
 import { useAppSelector } from 'app/hooks';
 import { useCustomTheme } from 'app/themes/theme';
-import { DRAWER_WIDTH } from 'app/shared/assets/layout-variables';
 import MenuIcon from '@mui/icons-material/Menu';
 import {
   fetchTaskCategories,
@@ -24,33 +15,34 @@ import { ReactComponent as PlusIcon } from 'assets/images/icon-plus.svg';
 import { ButtonComponent } from '../button-component/button-component';
 import { DrawerElement, MenuElement } from './components';
 import { defaultTaskCategory } from 'app/shared/assets';
-
-const CustomToolbar = styled(Toolbar)(({ theme }) => ({
-  position: 'relative',
-  padding: '14px 20px',
-  [theme.breakpoints.up('md')]: {
-    paddingLeft: `${DRAWER_WIDTH + 20}px`,
-  },
-  [theme.breakpoints.up('xl')]: {
-    paddingRight: '70px',
-    paddingLeft: `${DRAWER_WIDTH + 70}px`,
-  },
-}));
+import {
+  CustomDesktopDrawer,
+  CustomMobileDrawer,
+  CustomNav,
+  CustomToolbar,
+  HeaderContainer,
+} from './assets';
 
 export const Header = (): JSX.Element => {
   const { authenticated, user } = useAppSelector(state => state.auth);
   const { categories } = useAppSelector(state => state.tasks);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const { theme } = useCustomTheme();
   const matches = useMediaQuery(theme!.breakpoints.up('md'));
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const location = useLocation();
 
   useEffect(() => {
     if (authenticated) {
-      dispatch(fetchTaskCategories());
+      dispatch(fetchTaskCategories()).then(() => {
+        if (categories.length && location.pathname === HOME_PAGE) {
+          dispatch(setCurrentCategory(categories[0]));
+        }
+      });
     }
-  }, [authenticated, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authenticated, dispatch, categories]);
 
   const setCategory = (alias: string): void => {
     const category = categories.filter(cat => cat.alias === alias)[0];
@@ -63,7 +55,7 @@ export const Header = (): JSX.Element => {
   };
 
   const handleDrawerToggle = (): void => {
-    setMobileOpen(!mobileOpen);
+    setMobileDrawerOpen(!mobileDrawerOpen);
   };
 
   const handleLogout = (): void => {
@@ -73,26 +65,20 @@ export const Header = (): JSX.Element => {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <AppBar
-        position="fixed"
-        sx={{
-          background: theme?.palette.background.default,
-          boxShadow: 'none',
-        }}
-      >
+    <HeaderContainer>
+      <AppBar position="fixed">
         <CustomToolbar>
-          <IconButton
-            color="primary"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { md: 'none' } }}
-          >
-            <MenuIcon />
-          </IconButton>
           {authenticated && user && (
             <>
+              <IconButton
+                color="primary"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{ mr: 2, display: { md: 'none' } }}
+              >
+                <MenuIcon />
+              </IconButton>
               <ButtonComponent startIcon={<PlusIcon />} type="button">
                 Новая задача
               </ButtonComponent>
@@ -107,65 +93,34 @@ export const Header = (): JSX.Element => {
           )}
         </CustomToolbar>
       </AppBar>
-      <Box
-        component="nav"
-        sx={{ width: { sm: DRAWER_WIDTH }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
-      >
+      <CustomNav>
         {matches ? (
-          <Drawer
-            variant="permanent"
-            sx={{
-              display: { xs: 'none', sm: 'block' },
-              '& .MuiDrawer-paper': {
-                display: 'flex',
-                flexDirection: 'column',
-                boxSizing: 'border-box',
-                width: DRAWER_WIDTH,
-                border: 'none',
-                background: authenticated
-                  ? theme?.palette.background.paper
-                  : 'transparent',
-                boxShadow: authenticated ? theme?.shadows[8] : 'none',
-              },
-            }}
-            open
-          >
+          <CustomDesktopDrawer authed={authenticated} variant="permanent" open>
             <DrawerElement
               authenticated={authenticated}
-              theme={theme!}
               handleLogout={handleLogout}
               setCategory={setCategory}
+              toggleDrawer={handleDrawerToggle}
             />
-          </Drawer>
+          </CustomDesktopDrawer>
         ) : (
-          <Drawer
+          <CustomMobileDrawer
             variant="temporary"
-            open={mobileOpen}
+            open={mobileDrawerOpen}
             onClose={handleDrawerToggle}
             ModalProps={{
               keepMounted: true,
             }}
-            sx={{
-              display: { xs: 'block', sm: 'none' },
-              '& .MuiDrawer-paper': {
-                display: 'flex',
-                flexDirection: 'column',
-                boxSizing: 'border-box',
-                background: theme?.palette.background.paper,
-                width: DRAWER_WIDTH,
-              },
-            }}
           >
             <DrawerElement
               authenticated={authenticated}
-              theme={theme!}
               handleLogout={handleLogout}
               setCategory={setCategory}
+              toggleDrawer={handleDrawerToggle}
             />
-          </Drawer>
+          </CustomMobileDrawer>
         )}
-      </Box>
-    </Box>
+      </CustomNav>
+    </HeaderContainer>
   );
 };
