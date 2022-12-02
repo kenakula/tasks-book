@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0748e790.css",
+    "main.js": "/static/js/main.6f76bee9.js",
+    "static/js/787.d2025c7f.chunk.js": "/static/js/787.d2025c7f.chunk.js",
+    "static/media/icon-settings.svg": "/static/media/icon-settings.31937f776dd7732bb66faedbca09d06f.svg",
+    "static/media/icon-copy.svg": "/static/media/icon-copy.ab7dd6f4ebe04767f4ae01b692f10e53.svg",
+    "static/media/icon-tw.svg": "/static/media/icon-tw.712113fc90f30615343c5b7fadb5bee5.svg",
+    "static/media/icon-users.svg": "/static/media/icon-users.7cee8d0d73c501c8101e460347e9e6b3.svg",
+    "static/media/logo.svg": "/static/media/logo.eab497177091db9632d35f3916f0d0b5.svg",
+    "static/media/icon-moon.svg": "/static/media/icon-moon.19afb59a40f011a984b8431d02da74cd.svg",
+    "index.html": "/index.html",
+    "static/media/icon-work.svg": "/static/media/icon-work.e06ba1298c0106c0bca3448bc4fc3fe5.svg",
+    "static/media/icon-logout.svg": "/static/media/icon-logout.cbc98dc930803a082cdca4c3d582c252.svg",
+    "static/media/icon-calendar.svg": "/static/media/icon-calendar.741b2196ab13d3311430bc1a22db77aa.svg",
+    "static/media/icon-user.svg": "/static/media/icon-user.ac7bc7aaed174d47260d8088f2430fa2.svg",
+    "static/media/icon-add.svg": "/static/media/icon-add.931920b3d7fefb92b436c6f8cf3979d6.svg",
+    "static/media/icon-plus.svg": "/static/media/icon-plus.159524fff625bb9ee0d8ae18169e6443.svg",
+    "static/media/icon-home.svg": "/static/media/icon-home.6a3bbc4472a47bda2bb0fb2e326ef15b.svg",
+    "static/media/icon-fb.svg": "/static/media/icon-fb.7006c952490824a622b431fc530b84f4.svg",
+    "static/media/icon-stats.svg": "/static/media/icon-stats.949834f4804363f8efe9efcbe55dcec4.svg",
+    "static/media/icon-clock.svg": "/static/media/icon-clock.758a591dc03c419d765090e20a116ec6.svg",
+    "static/media/icon-trending.svg": "/static/media/icon-trending.7a49a344f768533dedbff42a067a1464.svg",
+    "static/media/icon-star.svg": "/static/media/icon-star.ef0a49381acbb31f3e4d1b9bd39b1076.svg",
+    "static/media/icon-sport.svg": "/static/media/icon-sport.a742390f0c1898054d5c33b12559f7b2.svg",
+    "static/media/icon-drop.svg": "/static/media/icon-drop.44d2204005045d335a230c9de45f976e.svg",
+    "main.0748e790.css.map": "/static/css/main.0748e790.css.map",
+    "main.6f76bee9.js.map": "/static/js/main.6f76bee9.js.map",
+    "787.d2025c7f.chunk.js.map": "/static/js/787.d2025c7f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0748e790.css",
+    "static/js/main.6f76bee9.js"
+  ]
+}
