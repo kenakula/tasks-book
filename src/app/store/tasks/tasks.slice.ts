@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { defaultTaskCategory } from 'app/shared/assets';
 import { ITaskCategory } from 'app/shared/types';
-import { fetchTasks } from '../mocks';
+import { fetchCategories, saveTaskCategory } from '../mocks';
 
 interface TasksState {
   categories: ITaskCategory[];
@@ -18,7 +18,16 @@ const initialState: TasksState = {
 export const fetchTaskCategories = createAsyncThunk(
   'taks/fetchCategories',
   async () => {
-    const res = await fetchTasks();
+    const res = await fetchCategories();
+
+    return res;
+  },
+);
+
+export const addTaskCategory = createAsyncThunk(
+  'tasks/saveCategory',
+  async (category: ITaskCategory) => {
+    const res = await saveTaskCategory(category);
 
     return res;
   },
@@ -29,6 +38,7 @@ export const tasksSlice = createSlice({
   initialState,
   reducers: {
     setCurrentCategory: (state, { payload }: PayloadAction<ITaskCategory>) => {
+      console.log('payload:', payload);
       state.currentCategory = payload;
     },
   },
@@ -40,6 +50,13 @@ export const tasksSlice = createSlice({
       .addCase(fetchTaskCategories.fulfilled, (state, { payload }) => {
         state.categoriesLoading = false;
         state.categories = payload;
+      })
+      .addCase(addTaskCategory.pending, state => {
+        state.categoriesLoading = true;
+      })
+      .addCase(addTaskCategory.fulfilled, (state, { payload }) => {
+        state.categoriesLoading = false;
+        state.categories = state.categories.concat(payload);
       });
   },
 });

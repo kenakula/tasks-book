@@ -1,5 +1,5 @@
 import React from 'react';
-import { SxProps } from '@mui/material';
+import { InputAdornment, SxProps } from '@mui/material';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 import { ColorTypes, InputTypes } from 'app/shared/types';
 import { CustomInput } from './assets';
@@ -19,6 +19,7 @@ interface Props<T extends FieldValues> {
   multiline?: number;
   id?: string;
   disabled?: boolean;
+  startIcon?: JSX.Element;
 }
 
 export const InputComponent = <T extends FieldValues>({
@@ -36,6 +37,7 @@ export const InputComponent = <T extends FieldValues>({
   multiline,
   disabled,
   id,
+  startIcon,
 }: Props<T>): JSX.Element => {
   return (
     <Controller
@@ -57,6 +59,17 @@ export const InputComponent = <T extends FieldValues>({
           error={error}
           disabled={disabled}
           helperText={error && errorMessage}
+          InputProps={
+            startIcon
+              ? {
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      {startIcon}
+                    </InputAdornment>
+                  ),
+                }
+              : undefined
+          }
         />
       )}
     />

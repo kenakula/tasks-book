@@ -31,10 +31,20 @@ export const saveUserDataMock = async (data: UserModel): Promise<UserModel> => {
   });
 };
 
-export const fetchTasks = async (): Promise<ITaskCategory[]> => {
+export const fetchCategories = async (): Promise<ITaskCategory[]> => {
   return new Promise(resolve => {
     setTimeout(() => {
       resolve(categories);
+    }, 500);
+  });
+};
+
+export const saveTaskCategory = async (
+  category: ITaskCategory,
+): Promise<ITaskCategory> => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(category);
     }, 500);
   });
 };

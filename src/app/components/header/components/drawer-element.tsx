@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Toolbar,
@@ -22,6 +22,7 @@ import {
 import { useAppSelector } from 'app/hooks';
 import { setCurrentCategory, useAppDispatch } from 'app/store';
 import { defaultTaskCategory } from 'app/shared/assets';
+import { CategoryDialog } from './category-dialog';
 
 interface Props {
   authenticated: boolean;
@@ -36,10 +37,19 @@ export const DrawerElement = ({
   handleLogout,
   authenticated,
 }: Props): JSX.Element => {
+  const [categoryDialogOpen, setCategoryDialogOpen] = useState(false);
   const dispatch = useAppDispatch();
   const { categories, currentCategory, categoriesLoading } = useAppSelector(
     state => state.tasks,
   );
+
+  const handleCategoryDialogClose = (): void => {
+    setCategoryDialogOpen(false);
+  };
+
+  const handleCategoryDialogOpen = (): void => {
+    setCategoryDialogOpen(true);
+  };
 
   const handleCategoryClick = (alias: string): void => {
     setCategory(alias);
@@ -116,7 +126,7 @@ export const DrawerElement = ({
                 </CategoryItem>
               ))}
               <ListItem disablePadding color="primary">
-                <AddCategoryButton>
+                <AddCategoryButton onClick={handleCategoryDialogOpen}>
                   <ListItemIcon>{renderIcon('add')}</ListItemIcon>
                   <ListItemText primary="Добавить" />
                 </AddCategoryButton>
@@ -174,6 +184,10 @@ export const DrawerElement = ({
               </ListItemButton>
             </ListItem>
           </List>
+          <CategoryDialog
+            openState={categoryDialogOpen}
+            onClose={handleCategoryDialogClose}
+          />
         </>
       ) : null}
     </Box>

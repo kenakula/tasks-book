@@ -40,6 +40,8 @@ interface Props {
   loadingIcon?: boolean;
   loading?: boolean;
   startIcon?: JSX.Element;
+  clickHandler?: () => void;
+  autofocus?: boolean;
 }
 
 export const ButtonComponent = ({
@@ -51,6 +53,8 @@ export const ButtonComponent = ({
   loadingIcon,
   loading,
   startIcon,
+  clickHandler,
+  autofocus,
 }: Props): JSX.Element => {
   if (loadingIcon) {
     return (
@@ -61,6 +65,8 @@ export const ButtonComponent = ({
         sx={styles ?? undefined}
         loading={loading}
         startIcon={startIcon ?? undefined}
+        onClick={clickHandler}
+        autoFocus={autofocus}
       >
         {children}
       </CustomLoadingButton>
@@ -74,6 +80,8 @@ export const ButtonComponent = ({
       color={color}
       sx={styles ?? undefined}
       startIcon={startIcon ?? undefined}
+      onClick={clickHandler}
+      autoFocus={autofocus}
     >
       {children}
     </CustomButton>

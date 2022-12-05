@@ -102,7 +102,7 @@ export const UserInfo = ({
           <Typography component="label" htmlFor="name-input">
             Ваш никнейм:
           </Typography>
-          <InputComponent
+          <InputComponent<FormModel>
             type="text"
             formControl={control}
             error={!!errors.name}
@@ -116,7 +116,7 @@ export const UserInfo = ({
           <Typography component="label" htmlFor="email-input">
             Ваша почта:
           </Typography>
-          <InputComponent
+          <InputComponent<FormModel>
             type="email"
             formControl={control}
             error={!!errors.email}
