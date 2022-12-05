@@ -47,10 +47,8 @@ export const LoginPage = (): JSX.Element => {
     resolver: yupResolver(formSchema),
   });
 
-  function onSubmit({ email }: FormModel): void {
-    dispatch(
-      logIn({ name: email, email, userImage: '', subscribed: false }),
-    ).then(() => {
+  function onSubmit({ email, password }: FormModel): void {
+    dispatch(logIn({ email, password })).then(() => {
       navigate(from, { replace: true });
     });
   }

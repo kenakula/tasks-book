@@ -1,4 +1,4 @@
-import { ITaskCategory, UserModel } from 'app/shared/types';
+import { ITaskCategory, IUser } from 'app/shared/types';
 
 const categories: ITaskCategory[] = [
   { name: 'Дом', alias: 'dom' },
@@ -7,7 +7,7 @@ const categories: ITaskCategory[] = [
   { name: 'Спорт ', alias: 'sport' },
 ];
 
-export const loginMock = async (value: UserModel): Promise<UserModel> => {
+export const loginMock = async (value: IUser): Promise<IUser> => {
   return new Promise(resolve => {
     setTimeout(() => {
       resolve(value);
@@ -23,7 +23,7 @@ export const logoutMock = async (): Promise<void> => {
   });
 };
 
-export const saveUserDataMock = async (data: UserModel): Promise<UserModel> => {
+export const saveUserDataMock = async (data: IUser): Promise<IUser> => {
   return new Promise(resolve => {
     setTimeout(() => {
       resolve(data);

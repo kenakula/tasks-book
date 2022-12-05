@@ -1,6 +1,11 @@
 import React from 'react';
 import { Avatar, IconButton, styled, SxProps } from '@mui/material';
-import { getAvatarLetters, getUsernameColorString } from 'app/shared/assets';
+import {
+  getAvatarLetters,
+  getMediaUrl,
+  getUsernameColorString,
+} from 'app/shared/assets';
+import { MediaModel } from 'app/shared/models';
 
 const CustomAvatar = styled(Avatar, {
   shouldForwardProp: prop => prop !== 'background',
@@ -14,27 +19,29 @@ const CustomAvatar = styled(Avatar, {
 }));
 
 interface Props {
-  username: string;
+  username?: string;
   clickHandler?: (event: React.MouseEvent<HTMLElement>) => void;
-  imagePath?: string;
+  image?: string | MediaModel;
   styles?: SxProps;
 }
 
 export const AvatarComponent = ({
   username,
   clickHandler,
-  imagePath,
+  image,
   styles,
 }: Props): JSX.Element => {
   return (
     <IconButton onClick={clickHandler ?? undefined}>
-      <CustomAvatar
-        src={imagePath ?? undefined}
-        sx={styles ?? undefined}
-        background={getUsernameColorString(username)}
-      >
-        {getAvatarLetters(username)}
-      </CustomAvatar>
+      {username && (
+        <CustomAvatar
+          src={getMediaUrl(image)}
+          sx={styles ?? undefined}
+          background={getUsernameColorString(username)}
+        >
+          {getAvatarLetters(username)}
+        </CustomAvatar>
+      )}
     </IconButton>
   );
 };

@@ -38,7 +38,6 @@ export const tasksSlice = createSlice({
   initialState,
   reducers: {
     setCurrentCategory: (state, { payload }: PayloadAction<ITaskCategory>) => {
-      console.log('payload:', payload);
       state.currentCategory = payload;
     },
   },

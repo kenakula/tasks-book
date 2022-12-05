@@ -68,6 +68,7 @@ function getWebpackAliases(options = {}) {
       src: paths.appSrc,
       app: path.resolve(baseUrlResolved, './app'),
       assets: path.resolve(baseUrlResolved, './assets'),
+      server: path.resolve(baseUrlResolved, '../tasks-book-backend')
     };
   }
 }

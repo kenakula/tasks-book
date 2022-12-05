@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
   getAvatarLetters,
+  getMediaUrl,
   getUsernameColorString,
   InputWrapper,
 } from 'app/shared/assets';
@@ -16,8 +17,8 @@ import {
   Socials,
 } from 'app/components';
 import { useAppDispatch, saveUserInfo } from 'app/store';
-import { UserModel } from 'app/shared/types';
 import { InfoWrapper, CustomAvatar, FileInput } from './custom-components';
+import { UserModel } from 'app/shared/models';
 
 type FormModel = {
   name: string;
@@ -51,7 +52,11 @@ export const UserInfo = ({
     handleSubmit,
     formState: { errors },
   } = useForm<FormModel>({
-    defaultValues: { name, email, subscribed },
+    defaultValues: {
+      name: name ?? '',
+      email: email ?? '',
+      subscribed: subscribed ?? false,
+    },
     resolver: yupResolver(formSchema),
   });
 
@@ -73,9 +78,14 @@ export const UserInfo = ({
   return (
     <InfoWrapper>
       <Box>
-        <CustomAvatar background={getUsernameColorString(name)} src={userImage}>
-          {getAvatarLetters(name)}
-        </CustomAvatar>
+        {name ? (
+          <CustomAvatar
+            background={getUsernameColorString(name)}
+            src={getMediaUrl(userImage)}
+          >
+            {getAvatarLetters(name)}
+          </CustomAvatar>
+        ) : null}
         <FileInput
           accept="image/*"
           id="button-file"

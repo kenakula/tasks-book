@@ -20,13 +20,14 @@ import {
 } from '../assets';
 import { setCurrentCategory, useAppDispatch } from 'app/store';
 import { defaultTaskCategory } from 'app/shared/assets';
+import { MediaModel } from 'app/shared/models';
 
 interface Props {
   theme: Theme;
-  username: string;
+  username: string | undefined;
   handleLogout: () => void;
   isMobile: boolean;
-  avatar: string;
+  avatar: string | MediaModel | undefined;
 }
 
 export const MenuElement = ({
@@ -84,7 +85,7 @@ export const MenuElement = ({
         <AvatarComponent
           clickHandler={handleClick}
           username={username}
-          imagePath={avatar}
+          image={avatar}
         />
         <DropdownButton onClick={handleClick} open={open}>
           <DropdownIcon fontSize="64px" />
